@@ -6,16 +6,16 @@ import java.net.PortUnreachableException;
 import java.util.*;
 
 public class Artista {
-    private static int Contador = 0;
+    private static int contador = 0;
     private String nombre;
     private int ID;
     private String nombreArtista;
     private int edad;
     private Set<EGenero> generos;
-    private Map<Album, String> Canciones;
+    private Map<String, Album> Canciones;
 
     public Artista(int ID, String nombreArtista, int edad) {
-        this.ID = Contador++;
+        this.ID = contador++;
         this.nombreArtista = nombreArtista;
         this.edad = edad;
         this.generos = new HashSet<>();
@@ -27,14 +27,6 @@ public class Artista {
         Canciones = new HashMap<>();
     }
 
-    public static int getContador() {
-        return Contador;
-    }
-
-    public static void setContador(int contador) {
-        Contador = contador;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -43,21 +35,10 @@ public class Artista {
         this.nombre = nombre;
     }
 
-    public int getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
-    }
-
     public Integer getID() {
         return ID;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
-    }
 
     public String getNombreArtista() {
         return nombreArtista;
@@ -83,11 +64,11 @@ public class Artista {
         this.generos = generos;
     }
 
-    public Map<Album, String> getCanciones() {
+    public Map<String, Album> getCanciones() {
         return Canciones;
     }
 
-    public void setCanciones(Map<Album, String> canciones) {
+    public void setCanciones(Map<String, Album> canciones) {
         Canciones = canciones;
     }
 
@@ -103,12 +84,22 @@ public class Artista {
         return Objects.hashCode(ID);
     }
 
-    public void DatosArtista() {
-        System.out.println("------------ Datos ------------");
-        System.out.println("|| Nombre : " + nombre + "||");
-        System.out.println("|| Edad : " + edad + " ||");
-        System.out.println("|| Generos : " + generos);
-        System.out.println("|| Canciones : " + Canciones);
+    public String DatosArtista() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("-----------DATOS-----------");
+        sb.append("Nombre: ").append(nombre);
+        sb.append("edad: ").append(edad);
+        sb.append("Generos: ").append(generos);
+        sb.append("Canciones: ");
+
+        if(getCanciones().isEmpty()){
+            sb.append("No tiene canciones este artista");
+        }else{
+            for(Map.Entry<String, Album> entry : getCanciones().entrySet()){
+                sb.append(entry.getKey()).append("\n");            }
+        }
+
+        return sb.toString();
     }
 
     public void GenerosDeArtista(Artista artista) {

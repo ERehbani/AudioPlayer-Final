@@ -1,8 +1,8 @@
 package com.example.audioplayerfinal.Clases;
 
-import com.example.audioplayerfinal.Interfaces.Multimedia;
+import com.example.audioplayerfinal.Interfaces.IMultimedia;
 
-public class ArchivoMultimedia implements Multimedia {
+public class ArchivoMultimedia implements IMultimedia {
     private String nombre;
     private int duracion;
 
