@@ -1,4 +1,4 @@
-package Interfaces;
+package com.example.audioplayerfinal.Interfaces;
 
 public interface Multimedia {
     boolean reproducir();

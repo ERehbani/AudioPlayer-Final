@@ -9,6 +9,6 @@ module com.example.audioplayerfinal {
 
     opens com.example.audioplayerfinal to javafx.fxml;
     exports com.example.audioplayerfinal;
-    exports Interfaces;
-    opens Interfaces to javafx.fxml;
+    exports com.example.audioplayerfinal.Interfaces;
+    opens com.example.audioplayerfinal.Interfaces to javafx.fxml;
 }
