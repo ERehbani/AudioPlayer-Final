@@ -1,4 +1,4 @@
-package ENums;
+package com.example.audioplayerfinal.ENums;
 
 public enum EGenero {
     POP ("Pop"),
