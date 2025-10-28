@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     private static int contador = 0;
+
     private int idCancion;
     private int idAlbum;
     private EGenero genero;
@@ -25,6 +26,8 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
     }
+
+    public void grabar(JSON);
 
     public int getIdCancion() {
         return idCancion;
