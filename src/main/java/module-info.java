@@ -6,6 +6,7 @@ module com.example.audioplayerfinal {
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires org.json;
 
     opens com.example.audioplayerfinal to javafx.fxml;
     exports com.example.audioplayerfinal;
