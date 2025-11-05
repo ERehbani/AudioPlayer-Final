@@ -22,6 +22,7 @@ public class Artista {
         Canciones = new HashMap<>();
     }
 
+
     public Artista() {
         this.generos = new HashSet<>();
         Canciones = new HashMap<>();
@@ -102,7 +103,11 @@ public class Artista {
         return sb.toString();
     }
 
-    public void GenerosDeArtista(Artista artista) {
-
+    public Set<EGenero> GenerosDelArtista(Artista artista){
+            return artista.getGeneros();
     }
+
+
+
+
 }
