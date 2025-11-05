@@ -1,7 +1,7 @@
 package com.example.audioplayerfinal.Clases;
-
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -83,6 +83,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
         return sb.toString();
     }
+
 
     public int cantidadDeReproducciones() {
         return cantidadReproducciones;

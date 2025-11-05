@@ -107,7 +107,6 @@ public class Album {
         sb.append("Album ").append(nombreAlbum).append("\n");
         sb.append("Discografica: ").append(discografica).append("\n");
         sb.append("Fecha de publicacion: ").append(fechaDePublicacion).append("\n");
-
         sb.append("Generos:" );
         if (generos.isEmpty()) {
             sb.append("No existen generos en el album");
