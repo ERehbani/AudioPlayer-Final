@@ -15,7 +15,7 @@ public enum EGenero {
     REGGAE("Reggae"),
     CUMBIA("Cumbia");
 
-    private String genero;
+    private final String genero;
 
     EGenero(String genero) {
         this.genero = genero;
