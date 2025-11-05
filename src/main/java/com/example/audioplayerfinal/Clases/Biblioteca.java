@@ -6,6 +6,6 @@ public class Biblioteca {
     private Catalogo<Album> catalogoAlbums;
     private Catalogo<Artista> catalogoArtistas;
     private Catalogo<Cancion> catalogoCanciones;
-    private Map<String, Playlist> playlists;
+    //private Map<String, Playlist> playlists;
 
 }

@@ -2,6 +2,8 @@ package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +29,9 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public void grabar(JSON);
+    public void grabar(){
+
+    };
 
     public int getIdCancion() {
         return idCancion;
