@@ -1,30 +1,31 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.ArtistaIncluido;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     private static int contador = 0;
 
     private int idCancion;
-    private int idAlbum;
     private EGenero genero;
-    private List<Integer> colaboradores;
+    private Set<Artista> colaboradores;
     private int cantidadReproducciones;
     private String fechaPublicacion;
 
-    public Cancion(String nombre, int duracion, int idCancion, int idAlbum, EGenero genero, List<Integer> colaboradores, int cantidadReproducciones, String fechaPublicacion) {
+    public Cancion(String nombre, int duracion, int idCancion,  EGenero genero, int cantidadReproducciones, String fechaPublicacion) {
         super(nombre, duracion);
         this.idCancion = idCancion;
-        this.idAlbum = idAlbum;
         this.genero = genero;
-        this.colaboradores = colaboradores;
+        this.colaboradores = new HashSet<Artista>();
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
     }
@@ -45,15 +46,11 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
         this.genero = genero;
     }
 
-    public int getIdAlbum() {
-        return idAlbum;
-    }
-
-    public List<Integer> getColaboradores() {
+    public Set<Artista> getColaboradores() {
         return colaboradores;
     }
 
-    public void setColaboradores(List<Integer> colaboradores) {
+    public void setColaboradores(Set<Artista> colaboradores) {
         this.colaboradores = colaboradores;
     }
 
@@ -71,6 +68,14 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public static void setContador(int contador) {
+        Cancion.contador = contador;
+    }
+
+    public void setIdCancion(int idCancion) {
+        this.idCancion = idCancion;
     }
 
     @Override
@@ -109,5 +114,21 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     public boolean anteriorCancion() {
         return false;
+    }
+
+    /// /Agregar Artista
+    public void AgregarArtista(Artista artista) throws ArtistaIncluido {
+        if (colaboradores.contains(artista)) {
+            throw  new ArtistaIncluido("Artista ya existente");
+        }
+        this.colaboradores.add(artista);
+    }
+
+    //// Eliminar Artista
+    public void EliminarArtista(Artista artista) throws ArtistaIncluido {
+        if (!colaboradores.contains(artista)) {
+            throw new ArtistaIncluido("Artista no existente");
+        }
+        colaboradores.remove(artista);
     }
 }

@@ -1,20 +1,22 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.*;
+import com.example.audioplayerfinal.Interfaces.IMetodoC;
 
 import java.util.*;
 
-public class Album {
+public class Album implements IMetodoC {
     private int id;
     private String nombreAlbum;
     private Map <String, Cancion> listaDeCanciones;
     private Set<EGenero> generos;
-    private Map<Integer, String> artistas;
-    private Date fechaDePublicacion;
+    private Map<String,Artista> artistas;
+    private String fechaDePublicacion;
     private String discografica;
     private static int contador = 0;
 
-    public Album(int id, String nombreAlbum, Date fechaDePublicacion, String discografica) {
+    public Album(String nombreAlbum, String fechaDePublicacion, String discografica) {
         this.id = contador;
         contador++;
         this.nombreAlbum = nombreAlbum;
@@ -41,11 +43,11 @@ public class Album {
         return generos;
     }
 
-    public Map<Integer, String> getArtistas() {
+    public Map<String,Artista> getArtistas() {
         return artistas;
     }
 
-    public Date getFechaDePublicacion() {
+    public String getFechaDePublicacion() {
         return fechaDePublicacion;
     }
 
@@ -61,11 +63,11 @@ public class Album {
         this.generos = generos;
     }
 
-    public void setArtistas(Map<Integer, String> artistas) {
+    public void setArtistas(Map<String, Artista> artistas) {
         this.artistas = artistas;
     }
 
-    public void setFechaDePublicacion(Date fechaDePublicacion) {
+    public void setFechaDePublicacion(String fechaDePublicacion) {
         this.fechaDePublicacion = fechaDePublicacion;
     }
 
@@ -91,16 +93,6 @@ public class Album {
         return listaDeCanciones.size();
     }
 
-    ///Mostrar canciones
-
-    public String mostrarCanciones() {
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Cancion> entry : listaDeCanciones.entrySet()) {
-            sb.append(entry.getKey() + " - ");
-        }
-
-        return sb.toString();
-    }
 
     ///Mostrar datos del album
 
@@ -125,7 +117,7 @@ public class Album {
             sb.append("No existen artistas en el album");
         }
         else {
-            for (Map.Entry<Integer, String> entry : artistas.entrySet()) {
+            for (Map.Entry< String,Artista> entry : artistas.entrySet()) {
                 sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
             }
         }
@@ -141,5 +133,65 @@ public class Album {
 
         return sb.toString();
 
+    }
+
+    ///Agregar canciones
+
+    @Override
+    public void agregarCancion(Cancion cancion) throws
+            CancionNoexistente {
+        if (listaDeCanciones.containsKey(cancion.getNombre())) {
+            throw new CancionNoexistente("La cacnion ya esta en el album");
+        }
+        listaDeCanciones.put(cancion.getNombre(), cancion);
+    }
+
+    ///Eliminar canciones
+
+    @Override
+    public void eliminarCancion(Cancion cancion) throws CancionNoexistente{
+        if (!listaDeCanciones.containsKey(cancion.getNombre())) {
+            throw new CancionNoexistente("La cacnion no esta en el album");
+        }
+        listaDeCanciones.remove(cancion.getNombre());
+    }
+
+    ///Mostrar canciones
+
+    @Override
+    public String mostrarCancion() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Cancion> entry : listaDeCanciones.entrySet()) {
+            sb.append(entry.getKey() + " - ");
+        }
+
+        return sb.toString();
+    }
+
+    public void AgregarArtista(Artista artista) throws ArtistaIncluido {
+        if (artista == null || artistas.containsValue(artista)) {
+            throw new ArtistaIncluido("La artista esta en el album");
+        }
+        artistas.put(artista.getNombreArtista(), artista);
+    }
+    public void eliminarArtista(Artista artista) throws ArtistaNoIncluido {
+        if (artista == null || !artistas.containsValue(artista)) {
+            throw new ArtistaNoIncluido("La artista no esta en el album");
+        }
+        artistas.remove(artista.getNombreArtista());
+    }
+
+    public void AgregarGenero(EGenero gen) throws GeneroInex {
+        if (generos.contains(gen)) {
+            throw new GeneroInex("La genero esta en el album");
+        }
+        generos.add(gen);
+    }
+
+    public void eliminarGenero(EGenero gen) throws GeneroInex {
+        if (!generos.contains(gen)) {
+            throw new GeneroInex("La genero no esta en el album");
+        }
+        generos.remove(gen);
     }
 }
