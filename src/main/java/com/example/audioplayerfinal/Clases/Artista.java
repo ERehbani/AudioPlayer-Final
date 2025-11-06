@@ -3,7 +3,6 @@ package com.example.audioplayerfinal.Clases;
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
 
-import java.net.PortUnreachableException;
 import java.util.*;
 
 public class Artista {
@@ -76,7 +75,7 @@ public class Artista {
             throw new ColeccionVaciaException("No tiene canciones ");
         } else {
             for (Map.Entry<String, Album> entry : albums.entrySet()) {
-                sb.append(entry.getValue().mostrarCanciones());
+                sb.append(entry.getValue().mostrarCancion());
             }
         }
 
@@ -92,7 +91,7 @@ public class Artista {
             throw new ColeccionVaciaException("No tiene canciones ");
         } else {
             for (Map.Entry<String, Album> entry : albums.entrySet()) {
-                sb.append(entry.getValue().mostrarCanciones());
+                sb.append(entry.getValue().mostrarCancion());
             }
         }
 
@@ -110,6 +109,34 @@ public class Artista {
             }
         }
         return sb.toString();
+    }
+
+    public void AgregarAlbum(Album album) throws Albums {
+        if (album == null || albums.containsKey(album.getNombreAlbum())) {
+            throw new Albums("Album ya esta registrado");
+        }
+        albums.put(album.getNombreAlbum(), album);
+    }
+
+    public void EliminarAlbum(Album album) throws Albums {
+        if (album == null || !albums.containsKey(album.getNombreAlbum())) {
+            throw new Albums("Album no esta registrado");
+        }
+        albums.remove(album.getNombreAlbum());
+    }
+
+    public void AgregarGenero(EGenero Gen)throws GeneroInex {
+        if (Gen == null || generos.contains(Gen)) {
+            throw new GeneroInex("Genero ya esta registrado");
+        }
+        generos.add(Gen);
+    }
+
+    public void EliminarGenero(EGenero Gen)throws GeneroInex {
+        if (Gen == null || !generos.contains(Gen)) {
+            throw new GeneroInex("Genero no esta registrado");
+        }
+        generos.remove(Gen);
     }
 
 }

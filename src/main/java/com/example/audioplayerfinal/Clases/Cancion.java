@@ -1,49 +1,56 @@
 package com.example.audioplayerfinal.Clases;
-
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.ArtistaIncluidoException;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     private static int contador = 0;
 
     private int idCancion;
-    private int idAlbum;
+    private EGenero genero;
+    private Set<Artista> colaboradores;
     private int cantidadReproducciones;
     private String fechaPublicacion;
-    private EGenero genero;
-    private List<Integer> colaboradores;
 
-    public Cancion(String nombre, int duracion,int idAlbum, int cantidadReproducciones, String fechaPublicacion, EGenero genero, List<Integer> colaboradores) {
+    public Cancion(String nombre, int duracion, int idCancion,  EGenero genero, int cantidadReproducciones, String fechaPublicacion) {
         super(nombre, duracion);
-        this.idCancion = contador++;
-        this.idAlbum = idAlbum;
+        this.idCancion = idCancion;
+        this.genero = genero;
+        this.colaboradores = new HashSet<Artista>();
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
-        this.genero = genero;
-        this.colaboradores = colaboradores;
     }
 
+    public void grabar(){
+
+    };
 
     public int getIdCancion() {
         return idCancion;
     }
 
-    public void setIdCancion(int idCancion) {
-        this.idCancion = idCancion;
+    public EGenero getGenero() {
+        return genero;
     }
 
-    public int getIdAlbum() {
-        return idAlbum;
+    public void setGenero(EGenero genero) {
+        this.genero = genero;
     }
 
-    public void setIdAlbum(int idAlbum) {
-        this.idAlbum = idAlbum;
+    public Set<Artista> getColaboradores() {
+        return colaboradores;
+    }
+
+    public void setColaboradores(Set<Artista> colaboradores) {
+        this.colaboradores = colaboradores;
     }
 
     public int getCantidadReproducciones() {
@@ -62,37 +69,26 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public EGenero getGenero() {
-        return genero;
+    public static void setContador(int contador) {
+        Cancion.contador = contador;
     }
 
-    public void setGenero(EGenero genero) {
-        this.genero = genero;
+    public void setIdCancion(int idCancion) {
+        this.idCancion = idCancion;
     }
 
-    public List<Integer> getColaboradores() {
-        return colaboradores;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idCancion);
     }
 
-    public void setColaboradores(List<Integer> colaboradores) {
-        this.colaboradores = colaboradores;
-    }
-
-
-
-    ///  ??
-    public void grabar(){};
-
-
-
-     ///  Mostrar todos los datos de la cancion;
-    public String DatosCancion() {
+    public String DatosArtista() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nombre: ").append(getNombre());
         sb.append("\nDuracion: ").append(getDuracion());
-        sb.append("\nGenero: ").append(genero.toString());
-        sb.append("\nColaboradores: ").append(colaboradores.toString());
+        sb.append("\nGenero: ").append(genero);
+        sb.append("\nColaboradores: ").append(colaboradores);
         sb.append("\nCantidad Reproducciones: ").append(cantidadReproducciones);
         sb.append("\nFecha de Publicacion: ").append(fechaPublicacion);
 
@@ -100,7 +96,9 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
     }
 
 
-
+    public int cantidadDeReproducciones() {
+        return cantidadReproducciones;
+    }
 
     public boolean reproducir() {
         return false;
@@ -116,5 +114,21 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     public boolean anteriorCancion() {
         return false;
+    }
+
+    /// /Agregar Artista
+    public void AgregarArtista(Artista artista) throws ArtistaIncluidoException {
+        if (colaboradores.contains(artista)) {
+            throw  new ArtistaIncluidoException("Artista ya existente");
+        }
+        this.colaboradores.add(artista);
+    }
+
+    //// Eliminar Artista
+    public void EliminarArtista(Artista artista) throws ArtistaIncluidoException {
+        if (!colaboradores.contains(artista)) {
+            throw new ArtistaIncluidoException("Artista no existente");
+        }
+        colaboradores.remove(artista);
     }
 }
