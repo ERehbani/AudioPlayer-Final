@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Objects;
 
-public class Cancion extends ArchivoMultimedia implements IMultimedia {
+public class    Cancion extends ArchivoMultimedia implements IMultimedia {
 
     private static int contador = 0;
 
