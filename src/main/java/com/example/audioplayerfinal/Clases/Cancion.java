@@ -14,47 +14,36 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     private int idCancion;
     private int idAlbum;
-    private EGenero genero;
-    private List<Integer> colaboradores;
     private int cantidadReproducciones;
     private String fechaPublicacion;
+    private EGenero genero;
+    private List<Integer> colaboradores;
 
-    public Cancion(String nombre, int duracion, int idCancion, int idAlbum, EGenero genero, List<Integer> colaboradores, int cantidadReproducciones, String fechaPublicacion) {
+    public Cancion(String nombre, int duracion,int idAlbum, int cantidadReproducciones, String fechaPublicacion, EGenero genero, List<Integer> colaboradores) {
         super(nombre, duracion);
-        this.idCancion = idCancion;
+        this.idCancion = contador++;
         this.idAlbum = idAlbum;
-        this.genero = genero;
-        this.colaboradores = colaboradores;
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
+        this.genero = genero;
+        this.colaboradores = colaboradores;
     }
 
-    public void grabar(){
-
-    };
 
     public int getIdCancion() {
         return idCancion;
     }
 
-    public EGenero getGenero() {
-        return genero;
-    }
-
-    public void setGenero(EGenero genero) {
-        this.genero = genero;
+    public void setIdCancion(int idCancion) {
+        this.idCancion = idCancion;
     }
 
     public int getIdAlbum() {
         return idAlbum;
     }
 
-    public List<Integer> getColaboradores() {
-        return colaboradores;
-    }
-
-    public void setColaboradores(List<Integer> colaboradores) {
-        this.colaboradores = colaboradores;
+    public void setIdAlbum(int idAlbum) {
+        this.idAlbum = idAlbum;
     }
 
     public int getCantidadReproducciones() {
@@ -73,27 +62,45 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idCancion);
+    public EGenero getGenero() {
+        return genero;
     }
 
-    public String DatosArtista() {
+    public void setGenero(EGenero genero) {
+        this.genero = genero;
+    }
+
+    public List<Integer> getColaboradores() {
+        return colaboradores;
+    }
+
+    public void setColaboradores(List<Integer> colaboradores) {
+        this.colaboradores = colaboradores;
+    }
+
+
+
+    ///  ??
+    public void grabar(){};
+
+
+
+     ///  Mostrar todos los datos de la cancion;
+    public String DatosCancion() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nombre: ").append(getNombre());
         sb.append("\nDuracion: ").append(getDuracion());
-        sb.append("\nGenero: ").append(genero);
-        sb.append("\nColaboradores: ").append(colaboradores);
+        sb.append("\nGenero: ").append(genero.toString());
+        sb.append("\nColaboradores: ").append(colaboradores.toString());
         sb.append("\nCantidad Reproducciones: ").append(cantidadReproducciones);
         sb.append("\nFecha de Publicacion: ").append(fechaPublicacion);
 
         return sb.toString();
     }
 
-    public int cantidadDeReproducciones() {
-        return cantidadReproducciones;
-    }
+
+
 
     public boolean reproducir() {
         return false;
