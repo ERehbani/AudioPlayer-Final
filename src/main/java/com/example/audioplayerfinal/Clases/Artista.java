@@ -1,7 +1,10 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.AlbumNoEncontradoExcepcion;
 import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
+import com.example.audioplayerfinal.Exceptions.EGeneroExistenteExcepcion;
+import com.example.audioplayerfinal.Exceptions.EGeneroNoEncontradoExcepcion;
 
 import java.util.*;
 
@@ -111,30 +114,30 @@ public class Artista {
         return sb.toString();
     }
 
-    public void AgregarAlbum(Album album) throws Albums {
+    public void AgregarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
         if (album == null || albums.containsKey(album.getNombreAlbum())) {
-            throw new Albums("Album ya esta registrado");
+            throw new AlbumNoEncontradoExcepcion("Album ya esta registrado");
         }
         albums.put(album.getNombreAlbum(), album);
     }
 
-    public void EliminarAlbum(Album album) throws Albums {
+    public void EliminarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
         if (album == null || !albums.containsKey(album.getNombreAlbum())) {
-            throw new Albums("Album no esta registrado");
+            throw new AlbumNoEncontradoExcepcion("Album no esta registrado");
         }
         albums.remove(album.getNombreAlbum());
     }
 
-    public void AgregarGenero(EGenero Gen)throws GeneroInex {
+    public void AgregarGenero(EGenero Gen)throws EGeneroExistenteExcepcion {
         if (Gen == null || generos.contains(Gen)) {
-            throw new GeneroInex("Genero ya esta registrado");
+            throw new EGeneroExistenteExcepcion("Genero ya esta registrado");
         }
         generos.add(Gen);
     }
 
-    public void EliminarGenero(EGenero Gen)throws GeneroInex {
+    public void EliminarGenero(EGenero Gen)throws EGeneroNoEncontradoExcepcion {
         if (Gen == null || !generos.contains(Gen)) {
-            throw new GeneroInex("Genero no esta registrado");
+            throw new EGeneroNoEncontradoExcepcion("Genero no esta registrado");
         }
         generos.remove(Gen);
     }
