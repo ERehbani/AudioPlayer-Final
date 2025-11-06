@@ -9,6 +9,9 @@ module com.example.audioplayerfinal {
     requires org.json;
 
     opens com.example.audioplayerfinal to javafx.fxml;
+    opens com.example.audioplayerfinal.Clases to javafx.base;
+    opens com.example.audioplayerfinal.Controllers to javafx.fxml;
+
     exports com.example.audioplayerfinal;
     exports com.example.audioplayerfinal.Interfaces;
     opens com.example.audioplayerfinal.Interfaces to javafx.fxml;

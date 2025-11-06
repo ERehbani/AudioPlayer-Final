@@ -1,45 +1,33 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
 
 import java.net.PortUnreachableException;
 import java.util.*;
 
 public class Artista {
     private static int contador = 0;
-    private String nombre;
     private int ID;
     private String nombreArtista;
-    private int edad;
     private Set<EGenero> generos;
-    private Map<String, Album> Canciones;
+    private Map<String, Album> albums;
 
     public Artista(int ID, String nombreArtista, int edad) {
         this.ID = contador++;
         this.nombreArtista = nombreArtista;
-        this.edad = edad;
         this.generos = new HashSet<>();
-        Canciones = new HashMap<>();
+        albums = new HashMap<>();
     }
-
 
     public Artista() {
         this.generos = new HashSet<>();
-        Canciones = new HashMap<>();
+        albums = new HashMap<>();
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getID() {
+    public int getID() {
         return ID;
     }
-
 
     public String getNombreArtista() {
         return nombreArtista;
@@ -47,14 +35,6 @@ public class Artista {
 
     public void setNombreArtista(String nombreArtista) {
         this.nombreArtista = nombreArtista;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public Set<EGenero> getGeneros() {
@@ -65,12 +45,9 @@ public class Artista {
         this.generos = generos;
     }
 
-    public Map<String, Album> getCanciones() {
-        return Canciones;
-    }
 
-    public void setCanciones(Map<String, Album> canciones) {
-        Canciones = canciones;
+    public Map<String, Album> getCanciones() {
+        return albums;
     }
 
     @Override
@@ -85,29 +62,54 @@ public class Artista {
         return Objects.hashCode(ID);
     }
 
-    public String DatosArtista() {
+
+    ///Muestra todos los datos del artista
+
+    public String datosArtista() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
-        sb.append("-----------DATOS-----------");
-        sb.append("Nombre: ").append(nombre);
-        sb.append("edad: ").append(edad);
+        sb.append("-----------DATOS DE ").append(nombreArtista).append("-----------");
+        sb.append("Nombre: ").append(nombreArtista);
         sb.append("Generos: ").append(generos);
         sb.append("Canciones: ");
 
-        if(getCanciones().isEmpty()){
-            sb.append("No tiene canciones este artista");
-        }else{
-            for(Map.Entry<String, Album> entry : getCanciones().entrySet()){
-                sb.append(entry.getKey()).append("\n");            }
+        if (albums.isEmpty()) {
+            throw new ColeccionVaciaException("No tiene canciones ");
+        } else {
+            for (Map.Entry<String, Album> entry : albums.entrySet()) {
+                sb.append(entry.getValue().mostrarCanciones());
+            }
         }
 
         return sb.toString();
     }
 
-    public Set<EGenero> GenerosDelArtista(Artista artista){
-            return artista.getGeneros();
+
+    ///Muestra los nombres de las canciones del artista
+    public String mostrarCanciones() throws ColeccionVaciaException {
+        StringBuilder sb = new StringBuilder();
+
+        if (albums.isEmpty()) {
+            throw new ColeccionVaciaException("No tiene canciones ");
+        } else {
+            for (Map.Entry<String, Album> entry : albums.entrySet()) {
+                sb.append(entry.getValue().mostrarCanciones());
+            }
+        }
+
+        return sb.toString();
     }
 
-
-
+    /// Muestra los nombres de los albumes del artista
+    public String mostrarAlbums() throws ColeccionVaciaException {
+        StringBuilder sb = new StringBuilder();
+        if (albums.isEmpty()) {
+            throw new ColeccionVaciaException("No tiene Albums ");
+        }else  {
+            for (Map.Entry<String, Album> entry : albums.entrySet()) {
+                sb.append(entry.getKey());
+            }
+        }
+        return sb.toString();
+    }
 
 }
