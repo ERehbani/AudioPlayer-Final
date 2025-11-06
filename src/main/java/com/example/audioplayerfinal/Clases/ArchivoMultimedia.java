@@ -2,7 +2,7 @@ package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
 
-public class ArchivoMultimedia implements IMultimedia {
+public abstract class ArchivoMultimedia implements IMultimedia {
     private String nombre;
     private int duracion;
 

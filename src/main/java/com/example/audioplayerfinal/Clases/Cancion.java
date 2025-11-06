@@ -1,7 +1,7 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
-import com.example.audioplayerfinal.Exceptions.ArtistaIncluido;
+import com.example.audioplayerfinal.Exceptions.ArtistaIncluidoException;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
 import org.json.JSONArray;
 import org.json.JSONObject;
