@@ -1,11 +1,8 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
-import com.example.audioplayerfinal.Exceptions.Albums;
 import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
-import com.example.audioplayerfinal.Exceptions.GeneroInex;
 
-import java.net.PortUnreachableException;
 import java.util.*;
 
 public class Artista {
