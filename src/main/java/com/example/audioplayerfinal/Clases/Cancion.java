@@ -1,20 +1,18 @@
 package com.example.audioplayerfinal.Clases;
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.ArtistaIncluidoException;
+import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class Cancion extends ArchivoMultimedia implements IMultimedia {
+public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentificador {
 
     private static int contador = 0;
 
-    private int idCancion;
+    private int id;
     private EGenero genero;
     private Set<Artista> colaboradores;
     private int cantidadReproducciones;
@@ -22,7 +20,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     public Cancion(String nombre, int duracion, int idCancion,  EGenero genero, int cantidadReproducciones, String fechaPublicacion) {
         super(nombre, duracion);
-        this.idCancion = idCancion;
+        this.id = idCancion;
         this.genero = genero;
         this.colaboradores = new HashSet<Artista>();
         this.cantidadReproducciones = cantidadReproducciones;
@@ -33,8 +31,8 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
 
     };
 
-    public int getIdCancion() {
-        return idCancion;
+    public int getId() {
+        return id;
     }
 
     public EGenero getGenero() {
@@ -73,13 +71,13 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
         Cancion.contador = contador;
     }
 
-    public void setIdCancion(int idCancion) {
-        this.idCancion = idCancion;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(idCancion);
+        return Objects.hashCode(id);
     }
 
     public String DatosArtista() {

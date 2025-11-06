@@ -2,13 +2,14 @@ package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.*;
+import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMetodosCancion;
 
 import java.util.*;
 
-public class Album implements IMetodosCancion {
+public class Album implements IMetodosCancion, IIdentificador {
     private int id;
-    private String nombreAlbum;
+    private String nombre;
     private Map <String, Cancion> listaDeCanciones;
     private Set<EGenero> generos;
     private Map<String,Artista> artistas;
@@ -19,7 +20,7 @@ public class Album implements IMetodosCancion {
     public Album(String nombreAlbum, String fechaDePublicacion, String discografica) {
         this.id = contador;
         contador++;
-        this.nombreAlbum = nombreAlbum;
+        this.nombre = nombreAlbum;
         this.listaDeCanciones = new HashMap<>();
         this.generos = new HashSet<>();
         this.artistas = new HashMap<>();
@@ -31,8 +32,8 @@ public class Album implements IMetodosCancion {
         return id;
     }
 
-    public String getNombreAlbum() {
-        return nombreAlbum;
+    public String getNombre() {
+        return nombre;
     }
 
     public Map<String, Cancion> getListaDeCanciones() {
@@ -55,8 +56,8 @@ public class Album implements IMetodosCancion {
         return discografica;
     }
 
-    public void setNombreAlbum(String nombreAlbum) {
-        this.nombreAlbum = nombreAlbum;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setGeneros(Set<EGenero> generos) {
@@ -99,7 +100,7 @@ public class Album implements IMetodosCancion {
     public String mostrarDatosAlbum() {
         StringBuilder sb = new StringBuilder();
         sb.append("----------------------------------------");
-        sb.append("Album ").append(nombreAlbum).append("\n");
+        sb.append("Album ").append(nombre).append("\n");
         sb.append("Discografica: ").append(discografica).append("\n");
         sb.append("Fecha de publicacion: ").append(fechaDePublicacion).append("\n");
         sb.append("Generos:" );
@@ -171,25 +172,25 @@ public class Album implements IMetodosCancion {
         if (artista == null || artistas.containsValue(artista)) {
             throw new ArtistaIncluidoException("La artista esta en el album");
         }
-        artistas.put(artista.getNombreArtista(), artista);
+        artistas.put(artista.getNombre(), artista);
     }
     public void eliminarArtista(Artista artista) throws ArtistaNoIncluidoException {
         if (artista == null || !artistas.containsValue(artista)) {
             throw new ArtistaNoIncluidoException("La artista no esta en el album");
         }
-        artistas.remove(artista.getNombreArtista());
+        artistas.remove(artista.getNombre());
     }
 
-    public void AgregarGenero(EGenero gen) throws GeneroInex {
+    public void AgregarGenero(EGenero gen) throws GeneroNoExistenteException {
         if (generos.contains(gen)) {
-            throw new GeneroInex("La genero esta en el album");
+            throw new GeneroNoExistenteException("La genero esta en el album");
         }
         generos.add(gen);
     }
 
-    public void eliminarGenero(EGenero gen) throws GeneroInex {
+    public void eliminarGenero(EGenero gen) throws GeneroNoExistenteException {
         if (!generos.contains(gen)) {
-            throw new GeneroInex("La genero no esta en el album");
+            throw new GeneroNoExistenteException("La genero no esta en el album");
         }
         generos.remove(gen);
     }

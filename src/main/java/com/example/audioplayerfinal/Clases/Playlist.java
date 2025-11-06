@@ -1,27 +1,27 @@
 package com.example.audioplayerfinal.Clases;
-
+import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMetodosCancion;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Playlist implements IMetodosCancion {
-    private int idPlaylist;
+public class Playlist implements IMetodosCancion, IIdentificador {
+    private int id;
     private String nombre;
     private List<Cancion> canciones;
     public Playlist(int idPlaylist, String nombre) {
-        this.idPlaylist = idPlaylist;
+        this.id = idPlaylist;
         this.nombre = nombre;
         this.canciones = new ArrayList<>();
     }
 
-    public int getIdPlaylist() {
-        return idPlaylist;
+    public int getId() {
+        return id;
     }
 
-    public void setIdPlaylist(int idPlaylist) {
-        this.idPlaylist = idPlaylist;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -61,11 +61,11 @@ public class Playlist implements IMetodosCancion {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Playlist playlist)) return false;
-        return idPlaylist == playlist.idPlaylist;
+        return id == playlist.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(idPlaylist);
+        return Objects.hashCode(id);
     }
 }
