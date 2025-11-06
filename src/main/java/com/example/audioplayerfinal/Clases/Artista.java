@@ -1,45 +1,35 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.Albums;
+import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
+import com.example.audioplayerfinal.Exceptions.GeneroInex;
 
 import java.net.PortUnreachableException;
 import java.util.*;
 
 public class Artista {
     private static int contador = 0;
-    private String nombre;
     private int ID;
     private String nombreArtista;
-    private int edad;
     private Set<EGenero> generos;
-    private Map<String, Album> Canciones;
+    private Map<String, Album> albums;
 
     public Artista(int ID, String nombreArtista, int edad) {
         this.ID = contador++;
         this.nombreArtista = nombreArtista;
-        this.edad = edad;
         this.generos = new HashSet<>();
-        Canciones = new HashMap<>();
+        albums = new HashMap<>();
     }
-
 
     public Artista() {
         this.generos = new HashSet<>();
-        Canciones = new HashMap<>();
+        albums = new HashMap<>();
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getID() {
+    public int getID() {
         return ID;
     }
-
 
     public String getNombreArtista() {
         return nombreArtista;
@@ -47,14 +37,6 @@ public class Artista {
 
     public void setNombreArtista(String nombreArtista) {
         this.nombreArtista = nombreArtista;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public Set<EGenero> getGeneros() {
@@ -65,12 +47,9 @@ public class Artista {
         this.generos = generos;
     }
 
-    public Map<String, Album> getCanciones() {
-        return Canciones;
-    }
 
-    public void setCanciones(Map<String, Album> canciones) {
-        Canciones = canciones;
+    public Map<String, Album> getCanciones() {
+        return albums;
     }
 
     @Override
@@ -85,29 +64,82 @@ public class Artista {
         return Objects.hashCode(ID);
     }
 
-    public String DatosArtista() {
+
+    ///Muestra todos los datos del artista
+
+    public String datosArtista() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
-        sb.append("-----------DATOS-----------");
-        sb.append("Nombre: ").append(nombre);
-        sb.append("edad: ").append(edad);
+        sb.append("-----------DATOS DE ").append(nombreArtista).append("-----------");
+        sb.append("Nombre: ").append(nombreArtista);
         sb.append("Generos: ").append(generos);
         sb.append("Canciones: ");
 
-        if(getCanciones().isEmpty()){
-            sb.append("No tiene canciones este artista");
-        }else{
-            for(Map.Entry<String, Album> entry : getCanciones().entrySet()){
-                sb.append(entry.getKey()).append("\n");            }
+        if (albums.isEmpty()) {
+            throw new ColeccionVaciaException("No tiene canciones ");
+        } else {
+            for (Map.Entry<String, Album> entry : albums.entrySet()) {
+                sb.append(entry.getValue().mostrarCancion());
+            }
         }
 
         return sb.toString();
     }
 
-    public Set<EGenero> GenerosDelArtista(Artista artista){
-            return artista.getGeneros();
+
+    ///Muestra los nombres de las canciones del artista
+    public String mostrarCanciones() throws ColeccionVaciaException {
+        StringBuilder sb = new StringBuilder();
+
+        if (albums.isEmpty()) {
+            throw new ColeccionVaciaException("No tiene canciones ");
+        } else {
+            for (Map.Entry<String, Album> entry : albums.entrySet()) {
+                sb.append(entry.getValue().mostrarCancion());
+            }
+        }
+
+        return sb.toString();
     }
 
+    /// Muestra los nombres de los albumes del artista
+    public String mostrarAlbums() throws ColeccionVaciaException {
+        StringBuilder sb = new StringBuilder();
+        if (albums.isEmpty()) {
+            throw new ColeccionVaciaException("No tiene Albums ");
+        }else  {
+            for (Map.Entry<String, Album> entry : albums.entrySet()) {
+                sb.append(entry.getKey());
+            }
+        }
+        return sb.toString();
+    }
 
+    public void AgregarAlbum(Album album) throws Albums {
+        if (album == null || albums.containsKey(album.getNombreAlbum())) {
+            throw new Albums("Album ya esta registrado");
+        }
+        albums.put(album.getNombreAlbum(), album);
+    }
 
+    public void EliminarAlbum(Album album) throws Albums {
+        if (album == null || !albums.containsKey(album.getNombreAlbum())) {
+            throw new Albums("Album no esta registrado");
+        }
+        albums.remove(album.getNombreAlbum());
+    }
+
+    public void AgregarGenero(EGenero Gen)throws GeneroInex {
+        if (Gen == null || generos.contains(Gen)) {
+            throw new GeneroInex("Genero ya esta registrado");
+        }
+        generos.add(Gen);
+    }
+
+    public void EliminarGenero(EGenero Gen)throws GeneroInex {
+        if (Gen == null || !generos.contains(Gen)) {
+            throw new GeneroInex("Genero no esta registrado");
+        }
+        generos.remove(Gen);
+    }
 
 }
