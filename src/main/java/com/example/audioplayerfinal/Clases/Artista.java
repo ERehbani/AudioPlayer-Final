@@ -1,8 +1,10 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
+import com.example.audioplayerfinal.Exceptions.AlbumNoEncontradoExcepcion;
 import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
-import com.example.audioplayerfinal.Exceptions.GeneroNoExistenteException;
+import com.example.audioplayerfinal.Exceptions.EGeneroExistenteExcepcion;
+import com.example.audioplayerfinal.Exceptions.EGeneroNoEncontradoExcepcion;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 
 import java.util.*;
@@ -113,30 +115,30 @@ public class Artista implements IIdentificador {
         return sb.toString();
     }
 
-    public void AgregarAlbum(Album album) throws Albums {
+    public void AgregarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
         if (album == null || albums.containsKey(album.getNombre())) {
-            throw new Albums("Album ya esta registrado");
+            throw new AlbumNoEncontradoExcepcion("Album ya esta registrado");
         }
         albums.put(album.getNombre(), album);
     }
 
-    public void EliminarAlbum(Album album) throws Albums {
+    public void EliminarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
         if (album == null || !albums.containsKey(album.getNombre())) {
-            throw new Albums("Album no esta registrado");
+            throw new AlbumNoEncontradoExcepcion("Album no esta registrado");
         }
         albums.remove(album.getNombre());
     }
 
-    public void AgregarGenero(EGenero Gen)throws GeneroNoExistenteException {
+    public void AgregarGenero(EGenero Gen)throws EGeneroExistenteExcepcion {
         if (Gen == null || generos.contains(Gen)) {
-            throw new GeneroNoExistenteException("Genero ya esta registrado");
+            throw new EGeneroExistenteExcepcion("Genero ya esta registrado");
         }
         generos.add(Gen);
     }
 
-    public void EliminarGenero(EGenero Gen)throws GeneroNoExistenteException {
+    public void EliminarGenero(EGenero Gen)throws EGeneroNoEncontradoExcepcion {
         if (Gen == null || !generos.contains(Gen)) {
-            throw new GeneroNoExistenteException("Genero no esta registrado");
+            throw new EGeneroNoEncontradoExcepcion("Genero no esta registrado");
         }
         generos.remove(Gen);
     }

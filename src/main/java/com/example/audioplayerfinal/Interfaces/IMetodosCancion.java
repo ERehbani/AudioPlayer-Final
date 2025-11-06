@@ -6,8 +6,7 @@ import com.example.audioplayerfinal.Exceptions.CancionNoExistenteException;
 public interface IMetodosCancion {
 
 
-    void agregarCancion(Cancion cancion) throws
-            CancionNoExistenteException;
+    void agregarCancion(Cancion cancion) throws CancionNoExistenteException;
 
     void eliminarCancion(Cancion cancion) throws CancionNoExistenteException;
 
