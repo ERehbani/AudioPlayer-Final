@@ -1,12 +1,12 @@
 package com.example.audioplayerfinal.Clases;
 
-import com.example.audioplayerfinal.Interfaces.IMetodoCancion;
+import com.example.audioplayerfinal.Interfaces.IMetodoC;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Playlist implements IMetodoCancion {
+public class Playlist implements IMetodoC {
     private int idPlaylist;
     private String nombre;
     private List<Cancion> canciones;
