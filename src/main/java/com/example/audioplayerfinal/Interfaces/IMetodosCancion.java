@@ -11,5 +11,5 @@ public interface IMetodosCancion {
 
     void eliminarCancion(Cancion cancion) throws CancionNoExistenteException;
 
-    void mostrarCancion();
+    String mostrarCancion();
 }

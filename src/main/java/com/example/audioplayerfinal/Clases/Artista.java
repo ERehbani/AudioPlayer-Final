@@ -2,19 +2,21 @@ package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
+import com.example.audioplayerfinal.Exceptions.GeneroNoExistenteException;
+import com.example.audioplayerfinal.Interfaces.IIdentificador;
 
 import java.util.*;
 
-public class Artista {
+public class Artista implements IIdentificador {
     private static int contador = 0;
-    private int ID;
-    private String nombreArtista;
+    private int id;
+    private String nombre;
     private Set<EGenero> generos;
     private Map<String, Album> albums;
 
     public Artista(int ID, String nombreArtista, int edad) {
-        this.ID = contador++;
-        this.nombreArtista = nombreArtista;
+        this.id = contador++;
+        this.nombre = nombreArtista;
         this.generos = new HashSet<>();
         albums = new HashMap<>();
     }
@@ -24,16 +26,16 @@ public class Artista {
         albums = new HashMap<>();
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public String getNombreArtista() {
-        return nombreArtista;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreArtista(String nombreArtista) {
-        this.nombreArtista = nombreArtista;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Set<EGenero> getGeneros() {
@@ -53,12 +55,12 @@ public class Artista {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Artista artista = (Artista) o;
-        return Objects.equals(ID, artista.ID);
+        return Objects.equals(id, artista.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(ID);
+        return Objects.hashCode(id);
     }
 
 
@@ -66,8 +68,8 @@ public class Artista {
 
     public String datosArtista() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
-        sb.append("-----------DATOS DE ").append(nombreArtista).append("-----------");
-        sb.append("Nombre: ").append(nombreArtista);
+        sb.append("-----------DATOS DE ").append(nombre).append("-----------");
+        sb.append("Nombre: ").append(nombre);
         sb.append("Generos: ").append(generos);
         sb.append("Canciones: ");
 
@@ -112,29 +114,29 @@ public class Artista {
     }
 
     public void AgregarAlbum(Album album) throws Albums {
-        if (album == null || albums.containsKey(album.getNombreAlbum())) {
+        if (album == null || albums.containsKey(album.getNombre())) {
             throw new Albums("Album ya esta registrado");
         }
-        albums.put(album.getNombreAlbum(), album);
+        albums.put(album.getNombre(), album);
     }
 
     public void EliminarAlbum(Album album) throws Albums {
-        if (album == null || !albums.containsKey(album.getNombreAlbum())) {
+        if (album == null || !albums.containsKey(album.getNombre())) {
             throw new Albums("Album no esta registrado");
         }
-        albums.remove(album.getNombreAlbum());
+        albums.remove(album.getNombre());
     }
 
-    public void AgregarGenero(EGenero Gen)throws GeneroInex {
+    public void AgregarGenero(EGenero Gen)throws GeneroNoExistenteException {
         if (Gen == null || generos.contains(Gen)) {
-            throw new GeneroInex("Genero ya esta registrado");
+            throw new GeneroNoExistenteException("Genero ya esta registrado");
         }
         generos.add(Gen);
     }
 
-    public void EliminarGenero(EGenero Gen)throws GeneroInex {
+    public void EliminarGenero(EGenero Gen)throws GeneroNoExistenteException {
         if (Gen == null || !generos.contains(Gen)) {
-            throw new GeneroInex("Genero no esta registrado");
+            throw new GeneroNoExistenteException("Genero no esta registrado");
         }
         generos.remove(Gen);
     }
