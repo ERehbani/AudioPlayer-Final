@@ -10,18 +10,15 @@ public class Artista {
     private static int contador = 0;
     private int ID;
     private String nombreArtista;
-    private int edad;
     private Set<EGenero> generos;
     private Map<String, Album> albums;
 
     public Artista(int ID, String nombreArtista, int edad) {
         this.ID = contador++;
         this.nombreArtista = nombreArtista;
-        this.edad = edad;
         this.generos = new HashSet<>();
         albums = new HashMap<>();
     }
-
 
     public Artista() {
         this.generos = new HashSet<>();
@@ -32,21 +29,12 @@ public class Artista {
         return ID;
     }
 
-
     public String getNombreArtista() {
         return nombreArtista;
     }
 
     public void setNombreArtista(String nombreArtista) {
         this.nombreArtista = nombreArtista;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public Set<EGenero> getGeneros() {
@@ -74,11 +62,13 @@ public class Artista {
         return Objects.hashCode(ID);
     }
 
+
+    ///Muestra todos los datos del artista
+
     public String datosArtista() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
         sb.append("-----------DATOS DE ").append(nombreArtista).append("-----------");
         sb.append("Nombre: ").append(nombreArtista);
-        sb.append("edad: ").append(edad);
         sb.append("Generos: ").append(generos);
         sb.append("Canciones: ");
 
@@ -93,6 +83,8 @@ public class Artista {
         return sb.toString();
     }
 
+
+    ///Muestra los nombres de las canciones del artista
     public String mostrarCanciones() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
 
@@ -107,6 +99,7 @@ public class Artista {
         return sb.toString();
     }
 
+    /// Muestra los nombres de los albumes del artista
     public String mostrarAlbums() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
         if (albums.isEmpty()) {
@@ -116,7 +109,6 @@ public class Artista {
                 sb.append(entry.getKey());
             }
         }
-
         return sb.toString();
     }
 

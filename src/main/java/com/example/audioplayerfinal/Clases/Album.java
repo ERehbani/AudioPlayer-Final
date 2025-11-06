@@ -85,12 +85,14 @@ public class Album {
         return Objects.hashCode(id);
     }
 
-    //Contar cantidad de canciones
+    ///Contar cantidad de canciones
+
     public int cantidadDeCanciones() {
         return listaDeCanciones.size();
     }
 
-    //Mostrar canciones
+    ///Mostrar canciones
+
     public String mostrarCanciones() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Cancion> entry : listaDeCanciones.entrySet()) {
@@ -100,7 +102,8 @@ public class Album {
         return sb.toString();
     }
 
-    //Mostrar datos del album
+    ///Mostrar datos del album
+
     public String mostrarDatosAlbum() {
         StringBuilder sb = new StringBuilder();
         sb.append("----------------------------------------");
