@@ -17,7 +17,7 @@ public class Catalogo<T> {
         }
         try {
             T newItem = elementos.put(id, item);
-            return newItem == null;
+            return newItem != null;
         } catch (NullPointerException error){
             throw new IllegalArgumentException("La coleccion 'elementos' no está inicializado");
         } catch (Exception error) {
@@ -31,7 +31,7 @@ public class Catalogo<T> {
         }
 
         if (elementos.isEmpty()) {
-            throw new NoSuchElementException("El mapa está vacío. No hay elementos para buscar.");
+            throw new NoSuchElementException("El catalogo está vacío. No hay elementos para buscar.");
         }
 
         for (Map.Entry<Integer, T> entry : elementos.entrySet()) {
@@ -39,7 +39,6 @@ public class Catalogo<T> {
                 return entry.getValue();
             }
         }
-
         throw new NoSuchElementException("No se encontró un elemento con el id: " + id);
     }
 
