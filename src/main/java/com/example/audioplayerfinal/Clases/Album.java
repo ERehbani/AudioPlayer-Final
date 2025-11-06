@@ -2,11 +2,11 @@ package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.*;
-import com.example.audioplayerfinal.Interfaces.IMetodoC;
+import com.example.audioplayerfinal.Interfaces.IMetodosCancion;
 
 import java.util.*;
 
-public class Album implements IMetodoC {
+public class Album implements IMetodosCancion {
     private int id;
     private String nombreAlbum;
     private Map <String, Cancion> listaDeCanciones;
@@ -139,9 +139,9 @@ public class Album implements IMetodoC {
 
     @Override
     public void agregarCancion(Cancion cancion) throws
-            CancionNoexistente {
+            CancionNoExistenteException {
         if (listaDeCanciones.containsKey(cancion.getNombre())) {
-            throw new CancionNoexistente("La cacnion ya esta en el album");
+            throw new CancionNoExistenteException("La cacnion ya esta en el album");
         }
         listaDeCanciones.put(cancion.getNombre(), cancion);
     }
@@ -149,9 +149,9 @@ public class Album implements IMetodoC {
     ///Eliminar canciones
 
     @Override
-    public void eliminarCancion(Cancion cancion) throws CancionNoexistente{
+    public void eliminarCancion(Cancion cancion) throws CancionNoExistenteException{
         if (!listaDeCanciones.containsKey(cancion.getNombre())) {
-            throw new CancionNoexistente("La cacnion no esta en el album");
+            throw new CancionNoExistenteException("La cacnion no esta en el album");
         }
         listaDeCanciones.remove(cancion.getNombre());
     }
@@ -168,15 +168,15 @@ public class Album implements IMetodoC {
         return sb.toString();
     }
 
-    public void AgregarArtista(Artista artista) throws ArtistaIncluido {
+    public void AgregarArtista(Artista artista) throws ArtistaIncluidoException {
         if (artista == null || artistas.containsValue(artista)) {
-            throw new ArtistaIncluido("La artista esta en el album");
+            throw new ArtistaIncluidoException("La artista esta en el album");
         }
         artistas.put(artista.getNombreArtista(), artista);
     }
-    public void eliminarArtista(Artista artista) throws ArtistaNoIncluido {
+    public void eliminarArtista(Artista artista) throws ArtistaNoIncluidoException {
         if (artista == null || !artistas.containsValue(artista)) {
-            throw new ArtistaNoIncluido("La artista no esta en el album");
+            throw new ArtistaNoIncluidoException("La artista no esta en el album");
         }
         artistas.remove(artista.getNombreArtista());
     }

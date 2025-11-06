@@ -117,17 +117,17 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia {
     }
 
     /// /Agregar Artista
-    public void AgregarArtista(Artista artista) throws ArtistaIncluido {
+    public void AgregarArtista(Artista artista) throws ArtistaIncluidoException {
         if (colaboradores.contains(artista)) {
-            throw  new ArtistaIncluido("Artista ya existente");
+            throw  new ArtistaIncluidoException("Artista ya existente");
         }
         this.colaboradores.add(artista);
     }
 
     //// Eliminar Artista
-    public void EliminarArtista(Artista artista) throws ArtistaIncluido {
+    public void EliminarArtista(Artista artista) throws ArtistaIncluidoException {
         if (!colaboradores.contains(artista)) {
-            throw new ArtistaIncluido("Artista no existente");
+            throw new ArtistaIncluidoException("Artista no existente");
         }
         colaboradores.remove(artista);
     }
