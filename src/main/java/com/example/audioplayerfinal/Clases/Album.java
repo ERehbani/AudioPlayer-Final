@@ -7,7 +7,7 @@ import java.util.*;
 public class Album {
     private int id;
     private String nombreAlbum;
-    private Map <Integer, String> listaDeCanciones;
+    private Map <String, Cancion> listaDeCanciones;
     private Set<EGenero> generos;
     private Map<Integer, String> artistas;
     private Date fechaDePublicacion;
@@ -33,7 +33,7 @@ public class Album {
         return nombreAlbum;
     }
 
-    public Map<Integer, String> getListaDeCanciones() {
+    public Map<String, Cancion> getListaDeCanciones() {
         return listaDeCanciones;
     }
 
@@ -85,22 +85,25 @@ public class Album {
         return Objects.hashCode(id);
     }
 
-    //Contar cantidad de canciones
+    ///Contar cantidad de canciones
+
     public int cantidadDeCanciones() {
         return listaDeCanciones.size();
     }
 
-    //Mostrar canciones
+    ///Mostrar canciones
+
     public String mostrarCanciones() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer, String> entry : listaDeCanciones.entrySet()) {
-            sb.append(entry.getKey() + " - " + entry.getValue() + "\n");
+        for (Map.Entry<String, Cancion> entry : listaDeCanciones.entrySet()) {
+            sb.append(entry.getKey() + " - ");
         }
 
         return sb.toString();
     }
 
-    //Mostrar datos del album
+    ///Mostrar datos del album
+
     public String mostrarDatosAlbum() {
         StringBuilder sb = new StringBuilder();
         sb.append("----------------------------------------");
@@ -131,8 +134,8 @@ public class Album {
         if (listaDeCanciones.isEmpty()) {
             sb.append("No existen canciones en el album");
         }else{
-            for (Map.Entry<Integer, String> entry : listaDeCanciones.entrySet()) {
-                sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
+            for (Map.Entry<String, Cancion> entry : listaDeCanciones.entrySet()) {
+                sb.append(entry.getKey()).append(" - ");
             }
         }
 
