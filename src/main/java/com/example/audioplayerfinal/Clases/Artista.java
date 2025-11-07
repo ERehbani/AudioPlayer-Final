@@ -177,7 +177,7 @@ public class Artista implements IIdentificador {
                 for (EGenero g : EGenero.values()) {
                     if (g.getGenero().equalsIgnoreCase(generoStr)) {
                         try {
-                            artista.AgregarGenero(g);
+                            artista.agregarGenero(g);
                         } catch (EGeneroExistenteExcepcion e) {
                             e.printStackTrace();
                         }
@@ -193,7 +193,7 @@ public class Artista implements IIdentificador {
                 JSONObject jsonAlbum = albumsArray.getJSONObject(i);
                 Album album = Album.fromJSON(jsonAlbum);
                 try {
-                    artista.AgregarAlbum(album);
+                    artista.agregarAlbum(album);
                 } catch (AlbumNoEncontradoExcepcion e) {
                     e.printStackTrace();
                 }
