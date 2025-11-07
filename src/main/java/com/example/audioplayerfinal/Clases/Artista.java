@@ -114,28 +114,28 @@ public class Artista implements IIdentificador {
         return sb.toString();
     }
 
-    public void AgregarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
+    public void agregarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
         if (album == null || albums.containsKey(album.getNombre())) {
             throw new AlbumNoEncontradoExcepcion("Album ya esta registrado");
         }
         albums.put(album.getNombre(), album);
     }
 
-    public void EliminarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
+    public void eliminarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
         if (album == null || !albums.containsKey(album.getNombre())) {
             throw new AlbumNoEncontradoExcepcion("Album no esta registrado");
         }
         albums.remove(album.getNombre());
     }
 
-    public void AgregarGenero(EGenero Gen)throws EGeneroExistenteExcepcion {
+    public void agregarGenero(EGenero Gen)throws EGeneroExistenteExcepcion {
         if (Gen == null || generos.contains(Gen)) {
             throw new EGeneroExistenteExcepcion("Genero ya esta registrado");
         }
         generos.add(Gen);
     }
 
-    public void EliminarGenero(EGenero Gen)throws EGeneroNoEncontradoExcepcion {
+    public void eliminarGenero(EGenero Gen)throws EGeneroNoEncontradoExcepcion {
         if (Gen == null || !generos.contains(Gen)) {
             throw new EGeneroNoEncontradoExcepcion("Genero no esta registrado");
         }
@@ -177,7 +177,7 @@ public class Artista implements IIdentificador {
                 for (EGenero g : EGenero.values()) {
                     if (g.getGenero().equalsIgnoreCase(generoStr)) {
                         try {
-                            artista.AgregarGenero(g);
+                            artista.agregarGenero(g);
                         } catch (EGeneroExistenteExcepcion e) {
                             e.printStackTrace();
                         }
@@ -193,7 +193,7 @@ public class Artista implements IIdentificador {
                 JSONObject jsonAlbum = albumsArray.getJSONObject(i);
                 Album album = Album.fromJSON(jsonAlbum);
                 try {
-                    artista.AgregarAlbum(album);
+                    artista.agregarAlbum(album);
                 } catch (AlbumNoEncontradoExcepcion e) {
                     e.printStackTrace();
                 }

@@ -117,7 +117,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     }
 
     /// /Agregar Artista
-    public void AgregarArtista(Artista artista) throws ArtistaIncluidoException {
+    public void agregarArtista(Artista artista) throws ArtistaIncluidoException {
         if (colaboradores.contains(artista)) {
             throw  new ArtistaIncluidoException("Artista ya existente");
         }
@@ -125,7 +125,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     }
 
     //// Eliminar Artista
-    public void EliminarArtista(Artista artista) throws ArtistaIncluidoException {
+    public void eliminarArtista(Artista artista) throws ArtistaIncluidoException {
         if (!colaboradores.contains(artista)) {
             throw new ArtistaIncluidoException("Artista no existente");
         }
@@ -174,7 +174,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
             for (int i = 0; i < colabs.length(); i++) {
                 JSONObject jsonArtista = colabs.getJSONObject(i);
                 Artista a = Artista.fromJSON(jsonArtista);
-                c.AgregarArtista(a);
+                c.agregarArtista(a);;
             }
         }
         return c;
