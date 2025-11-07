@@ -3,6 +3,8 @@ import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.ArtistaIncluidoException;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -129,4 +131,55 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         }
         colaboradores.remove(artista);
     }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("nombre", getNombre());
+        json.put("duracion", getDuracion());
+        json.put("genero", genero.getGenero());
+        json.put("cantidadReproducciones", cantidadReproducciones);
+        json.put("fechaPublicacion", fechaPublicacion);
+
+        JSONArray colabs = new JSONArray();
+        for (Artista a : colaboradores) {
+            colabs.put(a.toJSON());
+        }
+        json.put("colaboradores", colabs);
+
+        return json;
+    }
+
+    public static Cancion fromJSON(JSONObject json) {
+        int id = json.getInt("id");
+        String nombre = json.getString("nombre");
+        int duracion = json.getInt("duracion");
+
+        String generoStr = json.getString("genero");
+        EGenero genero = null;
+        for (EGenero g : EGenero.values()) {
+            if (g.getGenero().equalsIgnoreCase(generoStr)) {
+                genero = g;
+                break;
+            }
+        }
+
+        int cantidadReproducciones = json.getInt("cantidadReproducciones");
+        String fechaPublicacion = json.getString("fechaPublicacion");
+
+        Cancion c = new Cancion(nombre, duracion, id, genero, cantidadReproducciones, fechaPublicacion);
+
+        JSONArray colabs = json.optJSONArray("colaboradores");
+        if (colabs != null) {
+            for (int i = 0; i < colabs.length(); i++) {
+                JSONObject jsonArtista = colabs.getJSONObject(i);
+                Artista a = Artista.fromJSON(jsonArtista);
+                c.AgregarArtista(a);
+            }
+        }
+        return c;
+    }
+
+
+
 }

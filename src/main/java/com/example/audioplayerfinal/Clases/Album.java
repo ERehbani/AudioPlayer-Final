@@ -4,6 +4,8 @@ import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.*;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMetodosCancion;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.*;
 
@@ -193,5 +195,93 @@ public class Album implements IMetodosCancion, IIdentificador {
             throw new GeneroNoExistenteException("La genero no esta en el album");
         }
         generos.remove(gen);
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("nombre", nombre);
+        json.put("fechaDePublicacion", fechaDePublicacion);
+        json.put("discografica", discografica);
+
+        // 🔹 Generos
+        JSONArray generosArray = new JSONArray();
+        for (EGenero g : generos) {
+            generosArray.put(g.getGenero()); // Guarda el nombre legible del género
+        }
+        json.put("generos", generosArray);
+
+        // 🔹 Canciones
+        JSONArray cancionesArray = new JSONArray();
+        for (Cancion c : listaDeCanciones.values()) {
+            cancionesArray.put(c.toJSON()); // se asume que Cancion tiene su propio toJSON()
+        }
+        json.put("canciones", cancionesArray);
+
+        // 🔹 Artistas
+        JSONArray artistasArray = new JSONArray();
+        for (Artista a : artistas.values()) {
+            artistasArray.put(a.toJSON()); // se asume que Artista tiene su propio toJSON()
+        }
+        json.put("artistas", artistasArray);
+
+        return json;
+    }
+
+
+    public static Album fromJSON(JSONObject json) {
+        String nombre = json.getString("nombre");
+        String fecha = json.getString("fechaDePublicacion");
+        String discografica = json.getString("discografica");
+
+        Album album = new Album(nombre, fecha, discografica);
+        album.id = json.getInt("id"); // asignación directa (no hay setter público)
+
+        // 🔹 Generos
+        JSONArray generosArray = json.optJSONArray("generos");
+        if (generosArray != null) {
+            for (int i = 0; i < generosArray.length(); i++) {
+                String generoStr = generosArray.getString(i);
+                for (EGenero g : EGenero.values()) {
+                    if (g.getGenero().equalsIgnoreCase(generoStr)) {
+                        try {
+                            album.AgregarGenero(g);
+                        } catch (GeneroNoExistenteException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 🔹 Canciones
+        JSONArray cancionesArray = json.optJSONArray("canciones");
+        if (cancionesArray != null) {
+            for (int i = 0; i < cancionesArray.length(); i++) {
+                JSONObject jsonCancion = cancionesArray.getJSONObject(i);
+                Cancion c = Cancion.fromJSON(jsonCancion);
+                try {
+                    album.agregarCancion(c);
+                } catch (CancionNoExistenteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        JSONArray artistasArray = json.optJSONArray("artistas");
+        if (artistasArray != null) {
+            for (int i = 0; i < artistasArray.length(); i++) {
+                JSONObject jsonArtista = artistasArray.getJSONObject(i);
+                Artista a = Artista.fromJSON(jsonArtista);
+                try {
+                    album.AgregarArtista(a);
+                } catch (ArtistaIncluidoException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return album;
     }
 }
