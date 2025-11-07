@@ -1,11 +1,10 @@
 package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
-import com.example.audioplayerfinal.Exceptions.AlbumNoEncontradoExcepcion;
-import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
-import com.example.audioplayerfinal.Exceptions.EGeneroExistenteExcepcion;
-import com.example.audioplayerfinal.Exceptions.EGeneroNoEncontradoExcepcion;
+import com.example.audioplayerfinal.Exceptions.*;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.*;
 
@@ -141,6 +140,66 @@ public class Artista implements IIdentificador {
             throw new EGeneroNoEncontradoExcepcion("Genero no esta registrado");
         }
         generos.remove(Gen);
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("nombre", nombre);
+
+        JSONArray generosArray = new JSONArray();
+        for (EGenero g : generos) {
+            generosArray.put(g.getGenero());
+        }
+        json.put("generos", generosArray);
+
+        JSONArray albumsArray = new JSONArray();
+        for (Album a : albums.values()) {
+            albumsArray.put(a.toJSON());
+        }
+        json.put("albums", albumsArray);
+
+        return json;
+    }
+
+    public static Artista fromJSON(JSONObject json) {
+        int id = json.getInt("id");
+        String nombre = json.getString("nombre");
+
+        Artista artista = new Artista();
+        artista.id = id;
+        artista.nombre = nombre;
+
+        JSONArray generosArray = json.optJSONArray("generos");
+        if (generosArray != null) {
+            for (int i = 0; i < generosArray.length(); i++) {
+                String generoStr = generosArray.getString(i);
+                for (EGenero g : EGenero.values()) {
+                    if (g.getGenero().equalsIgnoreCase(generoStr)) {
+                        try {
+                            artista.AgregarGenero(g);
+                        } catch (EGeneroExistenteExcepcion e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        JSONArray albumsArray = json.optJSONArray("albums");
+        if (albumsArray != null) {
+            for (int i = 0; i < albumsArray.length(); i++) {
+                JSONObject jsonAlbum = albumsArray.getJSONObject(i);
+                Album album = Album.fromJSON(jsonAlbum);
+                try {
+                    artista.AgregarAlbum(album);
+                } catch (AlbumNoEncontradoExcepcion e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return artista;
     }
 
 }

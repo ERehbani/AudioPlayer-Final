@@ -1,6 +1,8 @@
 package com.example.audioplayerfinal.Clases;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMetodosCancion;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,36 @@ public class Playlist implements IMetodosCancion, IIdentificador {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public JSONObject toJSON() {
+        JSONObject obj = new JSONObject();
+        obj.put("id", this.id);
+        obj.put("nombre", this.nombre);
+
+        JSONArray jsonCanciones = new JSONArray();
+        for (Cancion c : this.canciones) {
+            jsonCanciones.put(c.toJSON());
+        }
+        obj.put("canciones", jsonCanciones);
+
+        return obj;
+    }
+
+    // 🔽 MÉTODO FROM JSON
+    public static Playlist fromJSON(JSONObject obj) {
+        int id = obj.getInt("id");
+        String nombre = obj.getString("nombre");
+        Playlist playlist = new Playlist(id, nombre);
+
+        JSONArray jsonCanciones = obj.getJSONArray("canciones");
+        for (int i = 0; i < jsonCanciones.length(); i++) {
+            JSONObject jsonCancion = jsonCanciones.getJSONObject(i);
+            Cancion c = Cancion.fromJSON(jsonCancion);
+            playlist.agregarCancion(c);
+        }
+
+        return playlist;
     }
 
     @Override

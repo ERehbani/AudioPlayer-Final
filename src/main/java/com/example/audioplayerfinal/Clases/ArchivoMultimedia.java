@@ -30,7 +30,6 @@ public abstract class ArchivoMultimedia implements IMultimedia {
         this.duracion = duracion;
     }
 
-
     @Override
     public boolean reproducir() {
         return false;
