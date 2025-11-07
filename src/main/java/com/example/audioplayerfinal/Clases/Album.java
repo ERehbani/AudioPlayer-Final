@@ -170,7 +170,7 @@ public class Album implements IMetodosCancion, IIdentificador {
         return sb.toString();
     }
 
-    public void AgregarArtista(Artista artista) throws ArtistaIncluidoException {
+    public void agregarArtista(Artista artista) throws ArtistaIncluidoException {
         if (artista == null || artistas.containsValue(artista)) {
             throw new ArtistaIncluidoException("La artista esta en el album");
         }
@@ -183,7 +183,7 @@ public class Album implements IMetodosCancion, IIdentificador {
         artistas.remove(artista.getNombre());
     }
 
-    public void AgregarGenero(EGenero gen) throws GeneroNoExistenteException {
+    public void agregarGenero(EGenero gen) throws GeneroNoExistenteException {
         if (generos.contains(gen)) {
             throw new GeneroNoExistenteException("La genero esta en el album");
         }
@@ -245,7 +245,7 @@ public class Album implements IMetodosCancion, IIdentificador {
                 for (EGenero g : EGenero.values()) {
                     if (g.getGenero().equalsIgnoreCase(generoStr)) {
                         try {
-                            album.AgregarGenero(g);
+                            album.agregarGenero(g);
                         } catch (GeneroNoExistenteException e) {
                             e.printStackTrace();
                         }
@@ -275,7 +275,7 @@ public class Album implements IMetodosCancion, IIdentificador {
                 JSONObject jsonArtista = artistasArray.getJSONObject(i);
                 Artista a = Artista.fromJSON(jsonArtista);
                 try {
-                    album.AgregarArtista(a);
+                    album.agregarArtista(a);
                 } catch (ArtistaIncluidoException e) {
                     e.printStackTrace();
                 }
