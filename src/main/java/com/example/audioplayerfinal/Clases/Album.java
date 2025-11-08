@@ -38,8 +38,12 @@ public class Album implements IMetodosCancion, IIdentificador {
         return nombre;
     }
 
-    public Map<String, Cancion> getListaDeCanciones() {
-        return listaDeCanciones;
+    public String getListaDeCanciones() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Cancion> entry: listaDeCanciones.entrySet()){
+            sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
+        }
+        return sb.toString();
     }
 
     public Set<EGenero> getGeneros() {
@@ -101,11 +105,11 @@ public class Album implements IMetodosCancion, IIdentificador {
 
     public String mostrarDatosAlbum() {
         StringBuilder sb = new StringBuilder();
-        sb.append("----------------------------------------");
-        sb.append("Album ").append(nombre).append("\n");
+        sb.append("----------------------------------------\n");
+        sb.append("Album: ").append(nombre).append("\n");
         sb.append("Discografica: ").append(discografica).append("\n");
         sb.append("Fecha de publicacion: ").append(fechaDePublicacion).append("\n");
-        sb.append("Generos:" );
+        sb.append("Generos: ");
         if (generos.isEmpty()) {
             sb.append("No existen generos en el album");
         }else  {
@@ -120,11 +124,11 @@ public class Album implements IMetodosCancion, IIdentificador {
         }
         else {
             for (Map.Entry< String,Artista> entry : artistas.entrySet()) {
-                sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
+                sb.append(entry.getKey()).append(" - ");
             }
         }
 
-        sb.append("Lista de canciones:\n");
+        sb.append("\nLista de canciones:\n");
         if (listaDeCanciones.isEmpty()) {
             sb.append("No existen canciones en el album");
         }else{
