@@ -22,8 +22,8 @@ public abstract class ArchivoMultimedia implements IMultimedia {
         this.nombre = nombre;
     }
 
-    public int getDuracion() {
-        return duracion;
+    public double getDuracion() {
+        return duracion / 60;
     }
 
     public void setDuracion(int duracion) {

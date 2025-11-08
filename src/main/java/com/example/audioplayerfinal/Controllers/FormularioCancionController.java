@@ -54,7 +54,7 @@ public class FormularioCancionController {
             int reproducciones = Integer.parseInt(txtReproducciones.getText());
             String fecha = datePicker.getValue().toString();
 
-            Cancion nueva = new Cancion(nombre, duracion, 0, reproducciones, fecha, genero, colaboradores);
+            Cancion nueva = new Cancion(nombre, duracion, genero, reproducciones, fecha);
             listaCanciones.add(nueva);
 
             lblMensaje.setText("✅ Canción creada: " + nueva.getNombre());

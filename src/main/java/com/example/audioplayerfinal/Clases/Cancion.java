@@ -1,6 +1,8 @@
 package com.example.audioplayerfinal.Clases;
+
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.ArtistaIncluidoException;
+import com.example.audioplayerfinal.Exceptions.ColeccionVaciaException;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMultimedia;
 import org.json.JSONArray;
@@ -16,22 +18,25 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
 
     private int id;
     private EGenero genero;
+    private Artista artista;
     private Set<Artista> colaboradores;
     private int cantidadReproducciones;
     private String fechaPublicacion;
 
-    public Cancion(String nombre, int duracion, int idCancion,  EGenero genero, int cantidadReproducciones, String fechaPublicacion) {
+    public Cancion(String nombre, int duracion, EGenero genero, int cantidadReproducciones, String fechaPublicacion) {
         super(nombre, duracion);
-        this.id = idCancion;
+        this.id = contador++;
         this.genero = genero;
         this.colaboradores = new HashSet<Artista>();
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public void grabar(){
+    public void grabar() {
 
-    };
+    }
+
+    ;
 
     public int getId() {
         return id;
@@ -52,6 +57,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     public void setColaboradores(Set<Artista> colaboradores) {
         this.colaboradores = colaboradores;
     }
+
 
     public int getCantidadReproducciones() {
         return cantidadReproducciones;
@@ -82,13 +88,19 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         return Objects.hashCode(id);
     }
 
-    public String DatosArtista() {
+    public String datosCancion() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nombre: ").append(getNombre());
+        sb.append("\nArtista: ").append(artista.getNombre());
         sb.append("\nDuracion: ").append(getDuracion());
         sb.append("\nGenero: ").append(genero);
-        sb.append("\nColaboradores: ").append(colaboradores);
+        sb.append("\nColaboradores: ");
+
+        for (Artista a : colaboradores) {
+            sb.append("\n").append(a.getNombre());
+        }
+
         sb.append("\nCantidad Reproducciones: ").append(cantidadReproducciones);
         sb.append("\nFecha de Publicacion: ").append(fechaPublicacion);
 
@@ -116,15 +128,41 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         return false;
     }
 
-    /// /Agregar Artista
-    public void agregarArtista(Artista artista) throws ArtistaIncluidoException {
-        if (colaboradores.contains(artista)) {
-            throw  new ArtistaIncluidoException("Artista ya existente");
-        }
-        this.colaboradores.add(artista);
+    public Artista getArtista() {
+        return artista;
     }
 
-    //// Eliminar Artista
+    public void setArtista(Artista artista) {
+        this.artista = artista;
+    }
+
+    /// /Agregar Artista
+    public boolean agregarArtista(Artista artista) throws ArtistaIncluidoException {
+        if (artista == null) {
+            throw new IllegalArgumentException("El artista no puede ser nulo");
+        }
+
+        // Si no hay artista principal, lo asigna directamente
+        if (this.artista == null) {
+            this.artista = artista;
+            return true;
+        }
+
+        // Si ya es el artista principal, lanza excepción
+        if (this.artista.equals(artista)) {
+            throw new ArtistaIncluidoException("El artista ya es el artista principal de la canción");
+        }
+
+        if (colaboradores.contains(artista)) {
+            throw new ArtistaIncluidoException("El artista ya figura como colaborador");
+        }
+
+        colaboradores.add(artista);
+        return true;
+    }
+
+
+    /// / Eliminar Artista
     public void eliminarArtista(Artista artista) throws ArtistaIncluidoException {
         if (!colaboradores.contains(artista)) {
             throw new ArtistaIncluidoException("Artista no existente");
@@ -167,19 +205,28 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         int cantidadReproducciones = json.getInt("cantidadReproducciones");
         String fechaPublicacion = json.getString("fechaPublicacion");
 
-        Cancion c = new Cancion(nombre, duracion, id, genero, cantidadReproducciones, fechaPublicacion);
+        Cancion c = new Cancion(nombre, duracion, genero, cantidadReproducciones, fechaPublicacion);
 
         JSONArray colabs = json.optJSONArray("colaboradores");
         if (colabs != null) {
             for (int i = 0; i < colabs.length(); i++) {
                 JSONObject jsonArtista = colabs.getJSONObject(i);
                 Artista a = Artista.fromJSON(jsonArtista);
-                c.agregarArtista(a);;
+                c.agregarArtista(a);
+                ;
             }
         }
         return c;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Cancion{" +
+                "id=" + id +
+                ", genero=" + genero +
+                ", colaboradores=" + colaboradores +
+                ", cantidadReproducciones=" + cantidadReproducciones +
+                ", fechaPublicacion='" + fechaPublicacion + '\'' +
+                '}';
+    }
 }

@@ -1,4 +1,5 @@
 package com.example.audioplayerfinal.Clases;
+import com.example.audioplayerfinal.Exceptions.PlaylistVaciaException;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Interfaces.IMetodosCancion;
 import org.json.JSONArray;
@@ -12,8 +13,9 @@ public class Playlist implements IMetodosCancion, IIdentificador {
     private int id;
     private String nombre;
     private List<Cancion> canciones;
-    public Playlist(int idPlaylist, String nombre) {
-        this.id = idPlaylist;
+    private static int contador = 0;
+    public Playlist(String nombre) {
+        this.id = contador++;
         this.nombre = nombre;
         this.canciones = new ArrayList<>();
     }
@@ -34,8 +36,19 @@ public class Playlist implements IMetodosCancion, IIdentificador {
         this.nombre = nombre;
     }
 
-    public List<Cancion> getCanciones() {
-        return canciones;
+    @Override
+    public String mostrarCancion() throws PlaylistVaciaException {
+        StringBuilder sb = new StringBuilder();
+        if(canciones.isEmpty()){
+            throw new PlaylistVaciaException("La playlist está vacía");
+        }
+        sb.append("Canciones de la playlist: ").append(nombre).append("\n");
+        for (Cancion c: canciones){
+            sb.append(c.getDuracion()).append(" - ").append(c.getNombre())
+                    .append(" - ").append(c.getFechaPublicacion()).append("\n");
+        }
+
+        return sb.toString();
     }
 
     public void setCanciones(List<Cancion> canciones) {
@@ -49,15 +62,6 @@ public class Playlist implements IMetodosCancion, IIdentificador {
     @Override
     public void eliminarCancion(Cancion cancion) {
         this.canciones.remove(cancion);
-    }
-    @Override
-    public String mostrarCancion() {
-        StringBuilder sb = new StringBuilder();
-        for (Cancion cancion : this.canciones) {
-            sb.append(cancion.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 
     public JSONObject toJSON() {
@@ -78,7 +82,7 @@ public class Playlist implements IMetodosCancion, IIdentificador {
     public static Playlist fromJSON(JSONObject obj) {
         int id = obj.getInt("id");
         String nombre = obj.getString("nombre");
-        Playlist playlist = new Playlist(id, nombre);
+        Playlist playlist = new Playlist(nombre);
 
         JSONArray jsonCanciones = obj.getJSONArray("canciones");
         for (int i = 0; i < jsonCanciones.length(); i++) {

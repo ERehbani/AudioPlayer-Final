@@ -15,7 +15,7 @@ public class Artista implements IIdentificador {
     private Set<EGenero> generos;
     private Map<String, Album> albums;
 
-    public Artista(int ID, String nombreArtista, int edad) {
+    public Artista(String nombreArtista, int edad) {
         this.id = contador++;
         this.nombre = nombreArtista;
         this.generos = new HashSet<>();
@@ -39,8 +39,13 @@ public class Artista implements IIdentificador {
         this.nombre = nombre;
     }
 
-    public Set<EGenero> getGeneros() {
-        return generos;
+    public String getGeneros() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("GENEROS DE ").append(nombre).append(":\n");
+        for (EGenero genero: generos){
+            sb.append(genero.getGenero()).append("\n");
+        }
+        return sb.toString();
     }
 
     public void setGeneros(Set<EGenero> generos) {
@@ -70,9 +75,9 @@ public class Artista implements IIdentificador {
     public String datosArtista() throws ColeccionVaciaException {
         StringBuilder sb = new StringBuilder();
         sb.append("-----------DATOS DE ").append(nombre).append("-----------");
-        sb.append("Nombre: ").append(nombre);
-        sb.append("Generos: ").append(generos);
-        sb.append("Canciones: ");
+        sb.append("\nNombre: ").append(nombre);
+        sb.append("\nGeneros: ").append(generos);
+        sb.append("\nCanciones: ");
 
         if (albums.isEmpty()) {
             throw new ColeccionVaciaException("No tiene canciones ");
@@ -107,6 +112,7 @@ public class Artista implements IIdentificador {
         if (albums.isEmpty()) {
             throw new ColeccionVaciaException("No tiene Albums ");
         }else  {
+            sb.append("ALBUMS DE ").append(getNombre()).append(":\n");
             for (Map.Entry<String, Album> entry : albums.entrySet()) {
                 sb.append(entry.getKey());
             }
