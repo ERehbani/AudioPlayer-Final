@@ -16,8 +16,8 @@ public class Launcher {
     public static void main(String[] args) {
         Application.launch(HelloApplication.class, args);
         try {
-            Artista ysya = new Artista("YSY A", 27);
-            Artista duki = new Artista("Duki", 29);
+            Artista ysya = new Artista("YSY A");
+            Artista duki = new Artista("Duki");
             Album album = new Album("EL AFTER DEL AFTER", "11/11/2023", "Ysy A");
             Cancion nodamas = new Cancion("No da mas", 248, EGenero.TRAP, 50000, "11/11/2023");
             Playlist playlist = new Playlist(" 도우스케레레피올라");

@@ -19,6 +19,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     private int id;
     private EGenero genero;
     private Artista artista;
+    private Album album;
     private Set<Artista> colaboradores;
     private int cantidadReproducciones;
     private String fechaPublicacion;
@@ -35,8 +36,6 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     public void grabar() {
 
     }
-
-    ;
 
     public int getId() {
         return id;
@@ -58,6 +57,13 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         this.colaboradores = colaboradores;
     }
 
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
 
     public int getCantidadReproducciones() {
         return cantidadReproducciones;
