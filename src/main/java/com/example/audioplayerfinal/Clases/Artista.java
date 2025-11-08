@@ -15,7 +15,7 @@ public class Artista implements IIdentificador {
     private Set<EGenero> generos;
     private Map<String, Album> albums;
 
-    public Artista(String nombreArtista, int edad) {
+    public Artista(String nombreArtista) {
         this.id = contador++;
         this.nombre = nombreArtista;
         this.generos = new HashSet<>();
