@@ -9,36 +9,47 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Repositorio<T extends Integer, K>  {
+public class Repositorio<K, V>  {
 
-    private HashMap<Integer, K> repositorio;
+    private HashMap<K, V> repositorio;
 
     public Repositorio() {
-        this.repositorio = new HashMap<Integer, K>();
+        this.repositorio = new HashMap<K, V>();
     }
 
-    public void agregar(Integer t, K k) throws RepositorioNoExisteException, ElementoDuplicadoException {
-        if(repositorio == null) throw new RepositorioNoExisteException("El repositorio no fue inicializado");
-        if(repositorio.containsKey(t)) throw new ElementoDuplicadoException("El elemento ya existe en el repositorio");
-        repositorio.put(t, k);
+    public void agregar(K k, V v) throws RepositorioNoExisteException, ElementoDuplicadoException {
+        if(repositorio == null)
+            throw new RepositorioNoExisteException("El repositorio no fue inicializado");
+        if(repositorio.containsKey(k))
+            throw new ElementoDuplicadoException("El elemento ya existe en el repositorio");
+        repositorio.put(k, v);
     }
 
-    public void eliminar(Integer t) throws RepositorioNoExisteException, ElementoNoExisteException {
-        if(repositorio == null) throw new RepositorioNoExisteException("El repositorio no fue inicializado");
-        if(!repositorio.containsKey(t)) throw new ElementoNoExisteException("El elemento ya existe en el repositorio");
-        repositorio.remove(t);
+    public void eliminar(K k) throws RepositorioNoExisteException, ElementoNoExisteException {
+        if(repositorio == null)
+            throw new RepositorioNoExisteException("El repositorio no fue inicializado");
+        if(!repositorio.containsKey(k))
+            throw new ElementoNoExisteException("El elemento no existe en el repositorio");
+        repositorio.remove(k);
     }
 
     public String mostrar() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer, K> entry: repositorio.entrySet()){
+        for (Map.Entry<K, V> entry: repositorio.entrySet()){
             sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
         }
         return sb.toString();
     }
 
-    public K buscar(String nombre) throws ElementoNoExisteException {
-        for (K value : repositorio.values()) {
+    public V buscarPorClave(K k) throws ElementoNoExisteException {
+        if (!repositorio.containsKey(k))
+            throw new ElementoNoExisteException("No se encontró el elemento con la clave: " + k);
+
+        return repositorio.get(k);
+    }
+
+    public V buscar(String nombre) throws ElementoNoExisteException {
+        for (V value : repositorio.values()) {
             try {
                 String nombreValue = (String) value.getClass().getMethod("getNombre").invoke(value);
                 if (nombreValue.equalsIgnoreCase(nombre)) {
@@ -49,6 +60,10 @@ public class Repositorio<T extends Integer, K>  {
             }
         }
         throw new ElementoNoExisteException("No se encontró ningún elemento con el nombre: " + nombre);
+    }
+
+    public Collection<V> listarTodos() {
+        return repositorio.values();
     }
 
 }
