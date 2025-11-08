@@ -119,4 +119,47 @@ public class GestorMusic {
         return texto == null ? "" : texto.trim().toLowerCase();
     }
 
+    // Buscar canciones
+    public Cancion buscarCancionPorNombre(String nombre) throws ElementoNoExisteException {
+        String clave = normalizarTexto(nombre);
+        if(!cancionesPorNombre.containsKey(clave)){
+            throw new ElementoNoExisteException("No se encontró la cancion " + nombre);
+        }
+        return cancionesPorNombre.get(clave);
+    }
+
+    public Cancion buscarCancionPorId(int id) throws ElementoNoExisteException {
+        for (Cancion c: cancionesPorNombre.values()){
+            if(c.getId() == id){
+                return c;
+            }
+        }
+        throw new ElementoNoExisteException("No se encontró la cancion con ID: " + id);
+    }
+
+
+    // Buscar albumes
+    public Album buscarAlbumPorNombre(String nombre) throws ElementoNoExisteException{
+        String clave = normalizarTexto(nombre);
+        if(!albumesPorNombre.containsKey(clave)){
+            throw new ElementoNoExisteException("No se encontró el álbum con nombre: " + nombre);
+        }
+        return albumesPorNombre.get(clave);
+    }
+
+    public Artista buscarArtistaPorNombre(String nombre) throws ElementoNoExisteException {
+        String clave = normalizarTexto(nombre);
+        if(!artistasPorNombre.containsKey(clave)){
+            throw new ElementoNoExisteException("No se encontró el álbum con nombre: " + nombre);
+        }
+        return artistasPorNombre.get(clave);
+    }
+
+    public Playlist buscarPlaylistPorNombre(String nombre) throws ElementoNoExisteException{
+        String clave = normalizarTexto(nombre);
+        if(!playlistsPorNombre.containsKey(clave)){
+            throw new ElementoNoExisteException("No se encontró el álbum con nombre: " + nombre);
+        }
+        return playlistsPorNombre.get(clave);
+    }
 }

@@ -51,10 +51,6 @@ public class Playlist implements IMetodosCancion, IIdentificador {
         return sb.toString();
     }
 
-    public void setCanciones(List<Cancion> canciones) {
-        this.canciones = canciones;
-    }
-
     @Override
     public void agregarCancion(Cancion cancion) {
         this.canciones.add(cancion);
