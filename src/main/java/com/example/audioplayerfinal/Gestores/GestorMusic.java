@@ -1,5 +1,6 @@
-package com.example.audioplayerfinal.Clases;
+package com.example.audioplayerfinal.Gestores;
 
+import com.example.audioplayerfinal.Clases.*;
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.CancionNoExistenteException;
 import com.example.audioplayerfinal.Exceptions.ElementoDuplicadoException;
@@ -162,4 +163,6 @@ public class GestorMusic {
         }
         return playlistsPorNombre.get(clave);
     }
+
+
 }

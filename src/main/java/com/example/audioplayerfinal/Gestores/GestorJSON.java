@@ -1,5 +1,6 @@
-package com.example.audioplayerfinal.Clases;
+package com.example.audioplayerfinal.Gestores;
 
+import com.example.audioplayerfinal.Clases.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
