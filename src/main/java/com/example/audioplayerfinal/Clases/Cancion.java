@@ -35,10 +35,6 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public void grabar() {
-
-    }
-
     public String getRutaArchivo() {
         return rutaArchivo;
     }
@@ -121,11 +117,6 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         sb.append("\nFecha de Publicacion: ").append(fechaPublicacion);
 
         return sb.toString();
-    }
-
-
-    public int cantidadDeReproducciones() {
-        return cantidadReproducciones;
     }
 
     public boolean reproducir() {
