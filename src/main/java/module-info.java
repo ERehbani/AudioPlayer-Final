@@ -19,4 +19,5 @@ module com.example.audioplayerfinal {
     exports com.example.audioplayerfinal;
     exports com.example.audioplayerfinal.Interfaces;
     opens com.example.audioplayerfinal.Interfaces to javafx.fxml;
+    opens com.example.audioplayerfinal.Gestores to javafx.base;
 }
