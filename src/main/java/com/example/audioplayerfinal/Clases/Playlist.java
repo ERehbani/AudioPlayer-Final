@@ -14,6 +14,7 @@ public class Playlist implements IMetodosCancion, IIdentificador {
     private String nombre;
     private List<Cancion> canciones;
     private static int contador = 0;
+
     public Playlist(String nombre) {
         this.id = contador++;
         this.nombre = nombre;

@@ -20,14 +20,16 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     private EGenero genero;
     private Artista artista;
     private Album album;
+    private String rutaArchivo;
     private Set<Artista> colaboradores;
     private int cantidadReproducciones;
     private String fechaPublicacion;
 
-    public Cancion(String nombre, int duracion, EGenero genero, int cantidadReproducciones, String fechaPublicacion) {
+    public Cancion(String nombre, int duracion, EGenero genero, String ruta, int cantidadReproducciones, String fechaPublicacion) {
         super(nombre, duracion);
         this.id = contador++;
         this.genero = genero;
+        this.rutaArchivo = rutaArchivo;
         this.colaboradores = new HashSet<Artista>();
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
@@ -35,6 +37,14 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
 
     public void grabar() {
 
+    }
+
+    public String getRutaArchivo() {
+        return rutaArchivo;
+    }
+
+    public void setRuta(String rutaArchivo) {
+        this.rutaArchivo = rutaArchivo;
     }
 
     public int getId() {
@@ -182,6 +192,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         json.put("nombre", getNombre());
         json.put("duracion", getDuracion());
         json.put("genero", genero.getGenero());
+        json.put("rutaArchivo", rutaArchivo);
         json.put("cantidadReproducciones", cantidadReproducciones);
         json.put("fechaPublicacion", fechaPublicacion);
 
@@ -198,7 +209,6 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         int id = json.getInt("id");
         String nombre = json.getString("nombre");
         int duracion = json.getInt("duracion");
-
         String generoStr = json.getString("genero");
         EGenero genero = null;
         for (EGenero g : EGenero.values()) {
@@ -207,11 +217,11 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
                 break;
             }
         }
-
+        String rutaArchivo = json.optString("rutaArchivo", "");
         int cantidadReproducciones = json.getInt("cantidadReproducciones");
         String fechaPublicacion = json.getString("fechaPublicacion");
 
-        Cancion c = new Cancion(nombre, duracion, genero, cantidadReproducciones, fechaPublicacion);
+        Cancion c = new Cancion(nombre, duracion, genero, rutaArchivo, cantidadReproducciones, fechaPublicacion);
 
         JSONArray colabs = json.optJSONArray("colaboradores");
         if (colabs != null) {
