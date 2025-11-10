@@ -1,0 +1,18 @@
+[{
+    "artistas": [],
+    "canciones": [{
+        "colaboradores": [],
+        "rutaArchivo": "kingforaday.mp3",
+        "genero": "Cumbia",
+        "duracion": 5,
+        "id": 0,
+        "fechaPublicacion": "2010-3-32",
+        "nombre": "kingforaday",
+        "cantidadReproducciones": 39999
+    }],
+    "fechaDePublicacion": "2010-3-32",
+    "discografica": "Single",
+    "generos": [],
+    "id": 0,
+    "nombre": "kingforaday"
+}]
