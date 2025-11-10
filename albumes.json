@@ -1,0 +1,32 @@
+[{
+    "artistas": [],
+    "canciones": [{
+        "colaboradores": [
+            {
+                "albums": [],
+                "generos": ["Trap"],
+                "id": 1,
+                "nombre": "duki"
+            },
+            {
+                "albums": [],
+                "generos": ["Trap"],
+                "id": 2,
+                "nombre": "pablo chille"
+            }
+        ],
+        "rutaArchivo": "yhlqmdlg.mp3",
+        "artista": "bad bunny",
+        "genero": "Trap",
+        "duracion": 53,
+        "id": 0,
+        "fechaPublicacion": "2020-02-20",
+        "nombre": "yhlqmdlg",
+        "cantidadReproducciones": 34253
+    }],
+    "fechaDePublicacion": "2020-02-20",
+    "discografica": "Single",
+    "generos": ["Trap"],
+    "id": 0,
+    "nombre": "yhlqmdlg"
+}]

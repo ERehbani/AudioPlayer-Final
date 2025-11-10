@@ -9,11 +9,16 @@ import java.util.HashSet;
 public class PersistenciaDatos {
 
     public static void guardarTodo(GestorMusic servicio) {
-        GestorJSON.grabarArchivo(servicio.getCanciones(), "canciones.json");
-        GestorJSON.grabarArchivo(servicio.getArtista(), "artistas.json");
-        GestorJSON.grabarArchivo(servicio.getAlbums(), "albumes.json");
-        GestorJSON.grabarArchivo(servicio.getPlaylist(), "playlists.json");
-        System.out.println("💾 Datos guardados correctamente.");
+        try {
+            GestorJSON.grabarArchivo(servicio.getCanciones(), "canciones.json");
+            GestorJSON.grabarArchivo(servicio.getArtista(), "artistas.json");
+            GestorJSON.grabarArchivo(servicio.getAlbums(), "albumes.json");
+            GestorJSON.grabarArchivo(servicio.getPlaylist(), "playlists.json");
+            System.out.println("💾 Datos guardados correctamente.");
+        }catch (Exception e) {
+            System.out.println("Error al guardar el archivo." + e.getMessage());
+        }
+
     }
 
     public static void cargarTodo(GestorMusic servicio) {

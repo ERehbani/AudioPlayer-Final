@@ -1,6 +1,5 @@
-package com.example.audioplayerfinal.Reproductor;
+package com.example.audioplayerfinal.Clases;
 
-import com.example.audioplayerfinal.Clases.Cancion;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;

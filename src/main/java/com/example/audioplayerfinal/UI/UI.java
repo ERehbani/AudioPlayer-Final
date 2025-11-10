@@ -4,7 +4,7 @@ import com.example.audioplayerfinal.Clases.*;
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.*;
 import com.example.audioplayerfinal.Gestores.GestorMusic;
-import com.example.audioplayerfinal.Reproductor.ReproductorLista;
+import com.example.audioplayerfinal.Clases.ReproductorLista;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ public class UI {
 
     public static void main(String[] args) throws ElementoDuplicadoException, RepositorioNoExisteException {
         PersistenciaDatos.cargarTodo(servicio);
-
         mostrarMenuPrincipal();
 
         PersistenciaDatos.guardarTodo(servicio);
@@ -304,6 +303,32 @@ public class UI {
             Cancion nueva = servicio.crearCancion(nombre, duracion, genero, ruta, cantReproducciones, fecha);
             nueva.agregarArtista(artista);
 
+            System.out.print("¿Tiene colaboradores? (S/N): ");
+            String respuestaColab = sc.nextLine().trim().toUpperCase();
+
+            if (respuestaColab.equals("S")) {
+                boolean agregarMas = true;
+                while (agregarMas) {
+                    System.out.print("Ingrese el nombre del colaborador: ");
+                    String nombreColab = sc.nextLine();
+
+                    Artista colaborador;
+                    try {
+                        colaborador = servicio.buscarArtistaPorNombre(nombreColab);
+                    } catch (ElementoNoExisteException e) {
+                        System.out.println("🎤 Colaborador no encontrado, creando uno nuevo...");
+                        colaborador = servicio.crearArtista(nombreColab);
+                    }
+
+                    nueva.agregarArtista(colaborador);
+
+                    colaborador.agregarGenero(genero);
+
+                    System.out.print("¿Agregar otro colaborador? (S/N): ");
+                    agregarMas = sc.nextLine().trim().equalsIgnoreCase("S");
+                }
+            }
+
             System.out.print("¿Pertenece a un álbum existente? (S/N): ");
             String respuesta = sc.nextLine().trim().toUpperCase();
 
@@ -315,6 +340,11 @@ public class UI {
                     album.agregarCancion(nueva);
                     nueva.setAlbum(album);
                     artista.agregarAlbum(album);
+                    album.agregarArtista(artista);
+
+                    for (Artista colab : nueva.getColaboradores()) {
+                        album.agregarArtista(colab);
+                    }
                     System.out.println("📀 Canción agregada al álbum " + album.getNombre());
                 } catch (ElementoNoExisteException e) {
                     System.out.println("⚠️ El álbum no existe. Se agregará como single.");
@@ -420,7 +450,7 @@ public class UI {
         }
         System.out.println("\n=== PLAYLISTS ===");
         for (Playlist p : playlists) {
-            System.out.println("- " + p.getNombre());
+            System.out.println("- " + p.getNombre()+"- "+ p.mostrarCancion());
         }
     }
 
