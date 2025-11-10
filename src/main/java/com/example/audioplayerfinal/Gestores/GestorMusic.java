@@ -6,7 +6,9 @@ import com.example.audioplayerfinal.Exceptions.CancionNoExistenteException;
 import com.example.audioplayerfinal.Exceptions.ElementoDuplicadoException;
 import com.example.audioplayerfinal.Exceptions.ElementoNoExisteException;
 import com.example.audioplayerfinal.Exceptions.RepositorioNoExisteException;
+import com.example.audioplayerfinal.Utils.TextoUtils;
 
+import java.text.Normalizer;
 import java.util.*;
 
 public class GestorMusic {
@@ -42,10 +44,9 @@ public class GestorMusic {
     //La consola va a interactuar con esta clase y no con las demás.
 
     public Artista crearArtista(String nombre) throws ElementoDuplicadoException, RepositorioNoExisteException {
-        String clave = normalizarTexto(nombre);
-        if (artistasPorNombre.containsKey(clave)) {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        if (artistasPorNombre.containsKey(clave))
             throw new ElementoDuplicadoException("Ya existe un artista con el nombre: " + nombre);
-        }
 
         Artista nuevo = new Artista(nombre);
         repoArtistas.agregar(nuevo.getId(), nuevo);
@@ -56,10 +57,9 @@ public class GestorMusic {
 
     public Album crearAlbum(String nombre, String fecha, String discografica)
             throws ElementoDuplicadoException, RepositorioNoExisteException {
-        String clave = normalizarTexto(nombre);
-        if (albumesPorNombre.containsKey(clave)) {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        if (albumesPorNombre.containsKey(clave))
             throw new ElementoDuplicadoException("Ya existe un álbum con el nombre: " + nombre);
-        }
 
         Album nuevo = new Album(nombre, fecha, discografica);
         repoAlbumes.agregar(nuevo.getId(), nuevo);
@@ -67,12 +67,12 @@ public class GestorMusic {
         return nuevo;
     }
 
-    public Cancion crearCancion(String nombre, int duracionSeg, EGenero genero, String ruta, int cantReproducciones, String fecha) throws ElementoDuplicadoException, RepositorioNoExisteException, CancionNoExistenteException {
-        String clave = normalizarTexto(nombre);
+    public Cancion crearCancion(String nombre, int duracionSeg, EGenero genero, String ruta, int cantReproducciones, String fecha)
+            throws ElementoDuplicadoException, RepositorioNoExisteException, CancionNoExistenteException {
 
-        if (cancionesPorNombre.containsKey(clave)) {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        if (cancionesPorNombre.containsKey(clave))
             throw new ElementoDuplicadoException("Ya existe una canción con el nombre: " + nombre);
-        }
 
         Cancion nueva = new Cancion(nombre, duracionSeg, genero, ruta, cantReproducciones, fecha);
         Album albumAsociado = albumesPorNombre.get(clave);
@@ -93,19 +93,14 @@ public class GestorMusic {
         repoCanciones.agregar(nueva.getId(), nueva);
         cancionesPorNombre.put(clave, nueva);
 
-        if (!cancionesPorGenero.containsKey(genero)) {
-            cancionesPorGenero.put(genero, new HashSet<>());
-        }
-        cancionesPorGenero.get(genero).add(nueva);
-
+        cancionesPorGenero.computeIfAbsent(genero, k -> new HashSet<>()).add(nueva);
         return nueva;
     }
 
     public Playlist crearPlaylist(String nombre) throws ElementoDuplicadoException, RepositorioNoExisteException {
-        String clave = normalizarTexto(nombre);
-        if (playlistsPorNombre.containsKey(clave)) {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        if (playlistsPorNombre.containsKey(clave))
             throw new ElementoDuplicadoException("Ya existe una playlist con el nombre: " + nombre);
-        }
 
         Playlist nueva = new Playlist(nombre);
         repoPlaylists.agregar(nueva.getId(), nueva);
@@ -113,13 +108,10 @@ public class GestorMusic {
         return nueva;
     }
 
-    public String normalizarTexto(String texto) {
-        return texto == null ? "" : texto.trim().toLowerCase();
-    }
 
     // Buscar canciones
     public Cancion buscarCancionPorNombre(String nombre) throws ElementoNoExisteException {
-        String clave = normalizarTexto(nombre);
+        String clave = TextoUtils.normalizarTexto(nombre);
         if (!cancionesPorNombre.containsKey(clave)) {
             throw new ElementoNoExisteException("No se encontró la cancion " + nombre);
         }
@@ -154,44 +146,51 @@ public class GestorMusic {
     public boolean agregarCancion(Cancion cancion) throws ElementoDuplicadoException, RepositorioNoExisteException {
         if (cancion == null)
             throw new IllegalArgumentException("Se debe enviar una cancion");
+        String clave = TextoUtils.normalizarTexto(cancion.getNombre());
 
-        if (cancionesPorNombre.containsValue(cancion))
+        if (cancionesPorNombre.containsKey(clave))
             throw new ElementoDuplicadoException("La cancion ya fue agregada");
-        cancionesPorNombre.put(cancion.getNombre(), cancion);
+        cancionesPorNombre.put(clave, cancion);
         return true;
     }
 
     public boolean agregarAritsta(Artista artista) throws ElementoDuplicadoException {
         if (artista == null)
             throw new IllegalArgumentException("Se debe enviar un artista");
-        if (artistasPorNombre.containsValue(artista.getNombre()))
+        String clave = TextoUtils.normalizarTexto(artista.getNombre());
+        if (artistasPorNombre.containsKey(clave))
             throw new ElementoDuplicadoException("El artista ya se encuentra en el repositorio");
-        artistasPorNombre.put(artista.getNombre(), artista);
+
+        artistasPorNombre.put(clave, artista);
         return true;
     }
 
     public boolean agregarAlbum(Album album) throws ElementoDuplicadoException {
         if (album == null)
             throw new IllegalArgumentException("Se debe enviar un artista");
-        if (albumesPorNombre.containsValue(album.getNombre()))
-            throw new ElementoDuplicadoException("El artista ya se encuentra en el repositorio");
-        albumesPorNombre.put(album.getNombre(), album);
+        String clave = TextoUtils.normalizarTexto(album.getNombre());
+        if (albumesPorNombre.containsKey(clave))
+            throw new ElementoDuplicadoException("El álbum ya se encuentra en el repositorio");
+
+        albumesPorNombre.put(clave, album);
         return true;
     }
 
     public boolean agregarPlaylist(Playlist playlist) throws ElementoDuplicadoException {
         if (playlist == null)
             throw new IllegalArgumentException("Se debe enviar un artista");
-        if (playlistsPorNombre.containsValue(playlist.getNombre()))
-            throw new ElementoDuplicadoException("El artista ya se encuentra en el repositorio");
-        playlistsPorNombre.put(playlist.getNombre(), playlist);
+        String clave = TextoUtils.normalizarTexto(playlist.getNombre());
+        if (playlistsPorNombre.containsKey(clave))
+            throw new ElementoDuplicadoException("La playlist ya se encuentra en el repositorio");
+
+        playlistsPorNombre.put(clave, playlist);
         return true;
     }
 
 
     // Buscar albumes
     public Album buscarAlbumPorNombre(String nombre) throws ElementoNoExisteException {
-        String clave = normalizarTexto(nombre);
+        String clave = TextoUtils.normalizarTexto(nombre);
         if (!albumesPorNombre.containsKey(clave)) {
             throw new ElementoNoExisteException("No se encontró el album con nombre: " + nombre);
         }
@@ -199,17 +198,17 @@ public class GestorMusic {
     }
 
     public Artista buscarArtistaPorNombre(String nombre) throws ElementoNoExisteException {
-        String clave = normalizarTexto(nombre);
+        String clave = TextoUtils.normalizarTexto(nombre);
         if (!artistasPorNombre.containsKey(clave)) {
-            throw new ElementoNoExisteException("No se encontró el álbum con nombre: " + nombre);
+            throw new ElementoNoExisteException("No se encontró el artista con nombre: " + nombre);
         }
         return artistasPorNombre.get(clave);
     }
 
     public Playlist buscarPlaylistPorNombre(String nombre) throws ElementoNoExisteException {
-        String clave = normalizarTexto(nombre);
+        String clave = TextoUtils.normalizarTexto(nombre);
         if (!playlistsPorNombre.containsKey(clave)) {
-            throw new ElementoNoExisteException("No se encontró el álbum con nombre: " + nombre);
+            throw new ElementoNoExisteException("No se encontró la playlist con nombre: " + nombre);
         }
         return playlistsPorNombre.get(clave);
     }

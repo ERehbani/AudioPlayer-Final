@@ -3,9 +3,11 @@ package com.example.audioplayerfinal.Clases;
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.*;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
+import com.example.audioplayerfinal.Utils.TextoUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.Normalizer;
 import java.util.*;
 
 public class Artista implements IIdentificador {
@@ -120,15 +122,17 @@ public class Artista implements IIdentificador {
         return sb.toString();
     }
 
+
+
     public void agregarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
-        if (album == null || albums.containsKey(album.getNombre())) {
+        if (album == null || albums.containsKey(TextoUtils.normalizarTexto(album.getNombre()))) {
             throw new AlbumNoEncontradoExcepcion("Album ya esta registrado");
         }
         albums.put(album.getNombre(), album);
     }
 
     public void eliminarAlbum(Album album) throws AlbumNoEncontradoExcepcion {
-        if (album == null || !albums.containsKey(album.getNombre())) {
+        if (album == null || !albums.containsKey(TextoUtils.normalizarTexto(album.getNombre()))) {
             throw new AlbumNoEncontradoExcepcion("Album no esta registrado");
         }
         albums.remove(album.getNombre());

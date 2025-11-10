@@ -1,52 +1,50 @@
-
 [
     {
-        "albums": [],
-        "generos": ["Trap"],
-        "id": 1,
-        "nombre": "duki"
+        "albums": [{
+            "artistas": [],
+            "canciones": [{
+                "colaboradores": [],
+                "rutaArchivo": "New Way Out.mp3",
+                "artista": "Poppy",
+                "genero": "Rock",
+                "duracion": 0,
+                "id": 3,
+                "fechaPublicacion": "2024-11-15",
+                "nombre": "New Way Out",
+                "cantidadReproducciones": 3206975
+            }],
+            "fechaDePublicacion": "2024-11-15",
+            "discografica": "Independiente",
+            "generos": ["Rock"],
+            "id": 2,
+            "nombre": "New Way Out"
+        }],
+        "generos": ["Rock"],
+        "id": 2,
+        "nombre": "Poppy"
     },
     {
         "albums": [{
             "artistas": [],
             "canciones": [{
-                "colaboradores": [
-                    {
-                        "albums": [],
-                        "generos": ["Trap"],
-                        "id": 1,
-                        "nombre": "duki"
-                    },
-                    {
-                        "albums": [],
-                        "generos": ["Trap"],
-                        "id": 2,
-                        "nombre": "pablo chille"
-                    }
-                ],
-                "rutaArchivo": "yhlqmdlg.mp3",
-                "artista": "bad bunny",
-                "genero": "Trap",
-                "duracion": 53,
-                "id": 0,
-                "fechaPublicacion": "2020-02-20",
-                "nombre": "yhlqmdlg",
-                "cantidadReproducciones": 34253
+                "colaboradores": [],
+                "rutaArchivo": "It's not living.mp3",
+                "artista": "The 1975",
+                "genero": "Indie",
+                "duracion": 0,
+                "id": 4,
+                "fechaPublicacion": "2023-31-11",
+                "nombre": "It's not living",
+                "cantidadReproducciones": 900000
             }],
-            "fechaDePublicacion": "2020-02-20",
+            "fechaDePublicacion": "2023-31-11",
             "discografica": "Independiente",
-            "generos": ["Trap"],
-            "id": 1,
-            "nombre": "yhlqmdlg"
+            "generos": ["Indie"],
+            "id": 3,
+            "nombre": "It's not living"
         }],
-        "generos": ["Trap"],
-        "id": 0,
-        "nombre": "bad bunny"
-    },
-    {
-        "albums": [],
-        "generos": ["Trap"],
-        "id": 2,
-        "nombre": "pablo chille"
+        "generos": ["Indie"],
+        "id": 4,
+        "nombre": "The 1975"
     }
 ]
