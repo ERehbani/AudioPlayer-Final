@@ -6,9 +6,7 @@ import com.example.audioplayerfinal.Exceptions.*;
 import com.example.audioplayerfinal.Gestores.GestorMusic;
 import com.example.audioplayerfinal.Clases.ReproductorLista;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class UI {
 
@@ -413,17 +411,40 @@ public class UI {
         try {
             System.out.print("Nombre del álbum: ");
             String nombre = sc.nextLine();
+
+            System.out.print("Artista al que pertenece: ");
+            String nombreArtista = sc.nextLine();
+
+            Artista artista;
+            try {
+                artista = servicio.buscarArtistaPorNombre(nombreArtista);
+            } catch (ElementoNoExisteException e) {
+                System.out.println("🎤 Artista no encontrado, creando uno nuevo...");
+                artista = servicio.crearArtista(nombreArtista);
+            }
+
+            // Crear el mapa con el artista principal
+            Map<String, Artista> map = new HashMap<>();
+            map.put(artista.getNombre(), artista);
+
             System.out.print("Fecha de publicación: ");
             String fecha = sc.nextLine();
+
             System.out.print("Discográfica: ");
             String discografica = sc.nextLine();
 
             Album a = servicio.crearAlbum(nombre, fecha, discografica);
+            a.setArtistas(map);
+
+            // Mantener relación bidireccional
+            artista.agregarAlbum(a);
+
             System.out.println("✅ Álbum creado: " + a.getNombre());
         } catch (Exception e) {
             System.out.println("❌ " + e.getMessage());
         }
     }
+
 
     private static void crearPlaylistConsola() throws ElementoDuplicadoException, RepositorioNoExisteException {
         System.out.print("Nombre de la playlist: ");

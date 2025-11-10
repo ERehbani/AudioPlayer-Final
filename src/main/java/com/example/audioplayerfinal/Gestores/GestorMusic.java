@@ -62,6 +62,8 @@ public class GestorMusic {
             throw new ElementoDuplicadoException("Ya existe un álbum con el nombre: " + nombre);
 
         Album nuevo = new Album(nombre, fecha, discografica);
+        Map<String,Artista> map = new HashMap<>();
+        nuevo.setArtistas(map);
         repoAlbumes.agregar(nuevo.getId(), nuevo);
         albumesPorNombre.put(clave, nuevo);
         return nuevo;
