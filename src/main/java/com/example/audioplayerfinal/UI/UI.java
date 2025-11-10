@@ -89,7 +89,7 @@ public class UI {
             Cancion c = servicio.buscarCancionPorNombre(nombre);
             System.out.println("🎵 " + c.datosCancion());
 
-            // submenu de opciones para esa canción
+            // submenu de opciones canción
             int opcion;
             do {
                 System.out.println("\n1. ▶ Reproducir");
@@ -238,7 +238,7 @@ public class UI {
     }
 
     // ======================================================
-    // METODOS AUXILIARES (los mismos que ya tenías)
+    // METODOS AUXILIARES
     // ======================================================
 
     private static void buscarArtistaConsola() {
