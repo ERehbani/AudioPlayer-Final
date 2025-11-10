@@ -352,7 +352,7 @@ public class UI {
                     System.out.println("📀 Canción agregada al álbum " + album.getNombre());
                 } catch (ElementoNoExisteException e) {
                     System.out.println("Album no encontrado, creando uno nuevo...");
-                    Album albumCreado = servicio.crearAlbum(nombreAlbum, fecha, " ");
+                    Album albumCreado = servicio.crearAlbum(nombreAlbum, fecha, "Independiente");
                     albumCreado.agregarCancion(nueva);
                     nueva.setAlbum(albumCreado);
                     artista.agregarAlbum(albumCreado);
@@ -370,11 +370,29 @@ public class UI {
                     System.out.println("📀 Canción agregada al álbum " + albumCreado.getNombre());
                 }
             } else {
+                // Crear un álbum "Single" para la canción
+                Album albumSingle = servicio.crearAlbum(nueva.getNombre(), fecha, "Single");
+                albumSingle.agregarCancion(nueva);
+                nueva.setAlbum(albumSingle);
+
+                // Asociar artista y álbum mutuamente
                 artista.agregarCancion(nueva);
-                System.out.println("🎵 Canción registrada como single.");
+                artista.agregarAlbum(albumSingle);
+
+                if (!albumSingle.getArtistas().containsValue(artista)) {
+                    albumSingle.agregarArtista(artista);
+                }
+
+                // También agregar los colaboradores al álbum
+                for (Artista colab : nueva.getColaboradores()) {
+                    if (!albumSingle.getArtistas().containsValue(colab)) {
+                        albumSingle.agregarArtista(colab);
+                    }
+                }
+
+                System.out.println("🎵 Canción registrada como single en el álbum " + albumSingle.getNombre());
             }
 
-            System.out.println("✅ Canción creada: " + nueva.getNombre());
         } catch (Exception e) {
             System.out.println("❌ Error: " + e.getMessage());
         }

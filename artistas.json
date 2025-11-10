@@ -8,7 +8,7 @@
                 "artista": "Bad bunny",
                 "genero": "Reggaeton",
                 "duracion": 0,
-                "id": 5,
+                "id": 6,
                 "fechaPublicacion": "2025-02-25",
                 "nombre": "dtmf",
                 "cantidadReproducciones": 1243
@@ -32,7 +32,7 @@
                 "artista": "Poppy",
                 "genero": "Rock",
                 "duracion": 0,
-                "id": 6,
+                "id": 7,
                 "fechaPublicacion": "2024-11-15",
                 "nombre": "New Way Out",
                 "cantidadReproducciones": 3206975
@@ -43,7 +43,10 @@
             "id": 2,
             "nombre": "New Way Out"
         }],
-        "generos": ["Rock"],
+        "generos": [
+            "Trap",
+            "Rock"
+        ],
         "id": 2,
         "nombre": "Poppy"
     },
@@ -56,7 +59,7 @@
                 "artista": "The 1975",
                 "genero": "Indie",
                 "duracion": 0,
-                "id": 7,
+                "id": 8,
                 "fechaPublicacion": "2023-31-11",
                 "nombre": "It's not living",
                 "cantidadReproducciones": 900000
@@ -70,5 +73,11 @@
         "generos": ["Indie"],
         "id": 4,
         "nombre": "The 1975"
+    },
+    {
+        "albums": [],
+        "generos": [],
+        "id": 13,
+        "nombre": "Years & Years"
     }
 ]

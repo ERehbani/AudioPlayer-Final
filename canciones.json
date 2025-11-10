@@ -1,6 +1,17 @@
 [
     {
         "colaboradores": [],
+        "rutaArchivo": "yesterday.mp3",
+        "artista": "Poppy",
+        "genero": "Metal",
+        "duracion": 5,
+        "id": 19,
+        "fechaPublicacion": "2024-11-15",
+        "nombre": "yesterday",
+        "cantidadReproducciones": 300000
+    },
+    {
+        "colaboradores": [],
         "rutaArchivo": "It's not living.mp3",
         "artista": "The 1975",
         "genero": "Indie",
@@ -37,11 +48,48 @@
         "rutaArchivo": "R U mine?.mp3",
         "artista": "Arctic monkeys",
         "genero": "Indie",
-        "duracion": 4,
-        "id": 12,
+        "duracion": 0,
+        "id": 3,
         "fechaPublicacion": "2006-11-29",
         "nombre": "R U mine?",
         "cantidadReproducciones": 23435
+    },
+    {
+        "colaboradores": [{
+            "albums": [{
+                "artistas": [],
+                "canciones": [{
+                    "colaboradores": [],
+                    "rutaArchivo": "New Way Out.mp3",
+                    "artista": "Poppy",
+                    "genero": "Rock",
+                    "duracion": 0,
+                    "id": 5,
+                    "fechaPublicacion": "2024-11-15",
+                    "nombre": "New Way Out",
+                    "cantidadReproducciones": 3206975
+                }],
+                "fechaDePublicacion": "2024-11-15",
+                "discografica": "Independiente",
+                "generos": ["Rock"],
+                "id": 2,
+                "nombre": "New Way Out"
+            }],
+            "generos": [
+                "Trap",
+                "Rock"
+            ],
+            "id": 2,
+            "nombre": "Poppy"
+        }],
+        "rutaArchivo": "chambea jala.mp3",
+        "artista": "Bad bunny",
+        "genero": "Trap",
+        "duracion": 0,
+        "id": 4,
+        "fechaPublicacion": "2016-03-12",
+        "nombre": "chambea jala",
+        "cantidadReproducciones": 3000000
     },
     {
         "colaboradores": [
@@ -62,7 +110,7 @@
         "artista": "bad bunny",
         "genero": "Trap",
         "duracion": 0,
-        "id": 3,
+        "id": 6,
         "fechaPublicacion": "2020-02-20",
         "nombre": "yhlqmdlg",
         "cantidadReproducciones": 34253
@@ -73,9 +121,20 @@
         "artista": "Poppy",
         "genero": "Pop",
         "duracion": 0,
-        "id": 4,
+        "id": 7,
         "fechaPublicacion": "2024-11-15",
         "nombre": "the cost of giving up",
         "cantidadReproducciones": 13018438
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Shine.mp3",
+        "artista": "Years & Years",
+        "genero": "Pop",
+        "duracion": 0,
+        "id": 8,
+        "fechaPublicacion": "2015-11-25",
+        "nombre": "Shine",
+        "cantidadReproducciones": 9000000
     }
 ]
