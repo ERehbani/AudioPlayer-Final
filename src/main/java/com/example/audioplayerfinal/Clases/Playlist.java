@@ -38,15 +38,15 @@ public class Playlist implements IMetodosCancion, IIdentificador {
     }
 
     @Override
-    public String mostrarCancion() throws PlaylistVaciaException {
+    public String mostrarCancion() {
         StringBuilder sb = new StringBuilder();
         if(canciones.isEmpty()){
-            throw new PlaylistVaciaException("La playlist está vacía");
+            return " La playlist "+ nombre + " todavia no tiene ninguna cancion ";
+
         }
-        sb.append("Canciones de la playlist: ").append(nombre).append("\n");
+        sb.append("Canciones de la playlist: ");
         for (Cancion c: canciones){
-            sb.append(c.getDuracion()).append(" - ").append(c.getNombre())
-                    .append(" - ").append(c.getFechaPublicacion()).append("\n");
+            sb.append(c.getNombre()).append("-");
         }
 
         return sb.toString();

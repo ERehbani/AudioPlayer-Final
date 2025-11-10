@@ -420,7 +420,7 @@ public class UI {
         }
         System.out.println("\n=== PLAYLISTS ===");
         for (Playlist p : playlists) {
-            System.out.println("- " + p.getNombre());
+            System.out.println("- " + p.getNombre()+"- "+ p.mostrarCancion());
         }
     }
 
