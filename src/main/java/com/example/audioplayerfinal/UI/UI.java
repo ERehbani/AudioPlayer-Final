@@ -321,7 +321,6 @@ public class UI {
                     }
 
                     nueva.agregarArtista(colaborador);
-
                     colaborador.agregarGenero(genero);
 
                     System.out.print("¿Agregar otro colaborador? (S/N): ");
@@ -340,16 +339,35 @@ public class UI {
                     album.agregarCancion(nueva);
                     nueva.setAlbum(album);
                     artista.agregarAlbum(album);
-                    album.agregarArtista(artista);
+
+                    if (!album.getArtistas().containsValue(artista)) {
+                        album.agregarArtista(artista);
+                    }
 
                     for (Artista colab : nueva.getColaboradores()) {
-                        album.agregarArtista(colab);
+                        if (!album.getArtistas().containsValue(colab)) {
+                            album.agregarArtista(colab);
+                        }
                     }
                     System.out.println("📀 Canción agregada al álbum " + album.getNombre());
                 } catch (ElementoNoExisteException e) {
-                    System.out.println("⚠️ El álbum no existe. Se agregará como single.");
-                    //artista.agregarCancion(nueva);
-                    artista.agregarAlbum(new Album(nombreAlbum, fecha, "Independiente"));
+                    System.out.println("Album no encontrado, creando uno nuevo...");
+                    Album albumCreado = servicio.crearAlbum(nombreAlbum, fecha, " ");
+                    albumCreado.agregarCancion(nueva);
+                    nueva.setAlbum(albumCreado);
+                    artista.agregarAlbum(albumCreado);
+
+                    if (!albumCreado.getArtistas().containsValue(artista)) {
+                        albumCreado.agregarArtista(artista);
+                    }
+
+                    // Relaciona los colaboradores
+                    for (Artista colab : nueva.getColaboradores()) {
+                        if (!albumCreado.getArtistas().containsKey(artista.getId())) {
+                            albumCreado.agregarArtista(colab);
+                        }
+                    }
+                    System.out.println("📀 Canción agregada al álbum " + albumCreado.getNombre());
                 }
             } else {
                 artista.agregarCancion(nueva);
@@ -361,6 +379,7 @@ public class UI {
             System.out.println("❌ Error: " + e.getMessage());
         }
     }
+
 
     private static void listarCancionesConsola() {
         try {

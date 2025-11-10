@@ -118,7 +118,7 @@ public class Album implements IMetodosCancion, IIdentificador {
             }
         }
 
-        sb.append("Artistas:\n");
+        sb.append("Artistas: ");
         if (artistas.isEmpty()) {
             sb.append("No existen artistas en el album");
         }
