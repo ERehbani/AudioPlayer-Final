@@ -435,6 +435,12 @@ public class UI {
             System.out.print("Nombre de la playlist: ");
             String nombrePlaylist = sc.nextLine();
             Playlist p = servicio.buscarPlaylistPorNombre(nombrePlaylist);
+            if(p == null) {
+                Playlist newP = servicio.crearPlaylist(nombrePlaylist);
+                newP.agregarCancion(c);
+                System.out.println("✅ Canción agregada a " + newP.getNombre());
+                return;
+            }
             p.agregarCancion(c);
             System.out.println("✅ Canción agregada a " + p.getNombre());
         } catch (Exception e) {
