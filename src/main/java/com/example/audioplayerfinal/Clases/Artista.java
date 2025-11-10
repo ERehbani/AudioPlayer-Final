@@ -172,7 +172,14 @@ public class Artista implements IIdentificador {
             generos.add(cancion.getGenero());
         }
 
-        albumSingle.agregarCancion(cancion);
+
+        try{
+            albumSingle.agregarCancion(cancion);
+        }catch (CancionNoExistenteException e){
+            e.getMessage();
+        }
+
+
         albums.put(albumSingle.getNombre(), albumSingle);
     }
 

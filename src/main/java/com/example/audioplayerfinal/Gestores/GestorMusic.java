@@ -2,10 +2,7 @@ package com.example.audioplayerfinal.Gestores;
 
 import com.example.audioplayerfinal.Clases.*;
 import com.example.audioplayerfinal.ENums.EGenero;
-import com.example.audioplayerfinal.Exceptions.CancionNoExistenteException;
-import com.example.audioplayerfinal.Exceptions.ElementoDuplicadoException;
-import com.example.audioplayerfinal.Exceptions.ElementoNoExisteException;
-import com.example.audioplayerfinal.Exceptions.RepositorioNoExisteException;
+import com.example.audioplayerfinal.Exceptions.*;
 import com.example.audioplayerfinal.Utils.TextoUtils;
 
 import java.text.Normalizer;
@@ -62,6 +59,8 @@ public class GestorMusic {
             throw new ElementoDuplicadoException("Ya existe un álbum con el nombre: " + nombre);
 
         Album nuevo = new Album(nombre, fecha, discografica);
+        Map<String,Artista> map = new HashMap<>();
+        nuevo.setArtistas(map);
         repoAlbumes.agregar(nuevo.getId(), nuevo);
         albumesPorNombre.put(clave, nuevo);
         return nuevo;
@@ -212,4 +211,107 @@ public class GestorMusic {
         }
         return playlistsPorNombre.get(clave);
     }
+
+    public void eliminarCancion(String nombre) throws ElementoNoExisteException {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        Cancion c = buscarCancionPorNombre(nombre);
+
+        Album album = c.getAlbum();
+        if (album != null) {
+            try {
+                album.eliminarCancion(c);
+            } catch (CancionNoExistenteException ignored) {}
+        }
+
+        Artista artista = c.getArtista();
+        if (artista != null) {
+            try {
+                for (Album a : artista.getCanciones().values()) {
+                    if (a.contieneCancion(c)) {
+                        try {
+                            a.eliminarCancion(c);
+                        } catch (CancionNoExistenteException ignored) {}
+                    }
+                }
+            } catch (Exception ignored) {}
+        }
+
+        for (Playlist p : getPlaylist()) {
+            p.eliminarCancionPorNombre(nombre);
+        }
+
+        cancionesPorNombre.remove(clave);
+        try {
+            repoCanciones.eliminar(c.getId());
+        } catch (RepositorioNoExisteException | ElementoNoExisteException ignored) {}
+
+        System.out.println(" Canción '" + nombre + "' eliminada correctamente.");
+    }
+
+    public void eliminarArtista(String nombre) throws ElementoNoExisteException, ArtistaNoIncluidoException {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        Artista artista = buscarArtistaPorNombre(nombre);
+
+        List<String> cancionesAEliminar = new ArrayList<>();
+        for (Cancion c : new ArrayList<>(cancionesPorNombre.values())) {
+            if (c.getArtista() != null && c.getArtista().equals(artista)) {
+                cancionesAEliminar.add(c.getNombre());
+            }
+        }
+        for (String n : cancionesAEliminar) {
+            eliminarCancion(n);
+        }
+
+        for (Album album : new ArrayList<>(albumesPorNombre.values())) {
+            if (album.getArtistas().containsKey(artista.getNombre())) {
+                album.eliminarArtista(artista);
+            }
+        }
+
+        artistasPorNombre.remove(clave);
+        try {
+            repoArtistas.eliminar(artista.getId());
+        } catch (RepositorioNoExisteException | ElementoNoExisteException ignored) {}
+
+        System.out.println("Artista '" + nombre + "' y sus canciones fueron eliminados.");
+    }
+
+    public void eliminarAlbum(String nombre) throws ElementoNoExisteException {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        Album album = buscarAlbumPorNombre(nombre);
+
+        List<String> cancionesDeEsteAlbum = new ArrayList<>();
+        for (Cancion c : new ArrayList<>(cancionesPorNombre.values())) {
+            if (c.getAlbum() != null && c.getAlbum().equals(album)) {
+                cancionesDeEsteAlbum.add(c.getNombre());
+            }
+        }
+        for (String nc : cancionesDeEsteAlbum) {
+            eliminarCancion(nc);
+        }
+
+        for (Artista a : new ArrayList<>(artistasPorNombre.values())) {
+            try {
+                a.eliminarAlbum(album);
+            } catch (Exception ignored) {}
+        }
+
+        albumesPorNombre.remove(clave);
+        try {
+            repoAlbumes.eliminar(album.getId());
+        } catch (RepositorioNoExisteException | ElementoNoExisteException ignored) {}
+
+        System.out.println(" Álbum '" + nombre + "' y sus canciones fueron eliminados.");
+    }
+
+    public void eliminarPlaylist(String nombre) throws ElementoNoExisteException {
+        String clave = TextoUtils.normalizarTexto(nombre);
+        Playlist p = buscarPlaylistPorNombre(nombre);
+        playlistsPorNombre.remove(clave);
+        try {
+            repoPlaylists.eliminar(p.getId());
+        } catch (RepositorioNoExisteException | ElementoNoExisteException ignored) {}
+        System.out.println("✅ Playlist '" + nombre + "' eliminada correctamente.");
+    }
+
 }
