@@ -3,6 +3,7 @@ package com.example.audioplayerfinal.Clases;
 import com.example.audioplayerfinal.Gestores.GestorJSON;
 import com.example.audioplayerfinal.Gestores.GestorMusic;
 
+import java.io.File;
 import java.util.HashSet;
 
 public class PersistenciaDatos {
@@ -17,6 +18,11 @@ public class PersistenciaDatos {
 
     public static void cargarTodo(GestorMusic servicio) {
         try {
+
+            if(!existenArchivos()){
+                System.out.println("⚠️💾 Aún no hay datos cargados");
+                return;
+            }
             HashSet<Cancion> canciones = GestorJSON.leerArchivo("canciones", Cancion.class);
             for (Cancion c : canciones) {
                 servicio.agregarCancion(c);
@@ -42,5 +48,12 @@ public class PersistenciaDatos {
         } catch (Exception e) {
             System.out.println("⚠️ No se pudieron cargar algunos datos: " + e.getMessage());
         }
+    }
+
+    private static boolean existenArchivos(){
+        return new File("canciones.json").exists() ||
+                new File("artistas.json").exists() ||
+                new File("playlists.json").exists()||
+                new File("albums.json").exists();
     }
 }
