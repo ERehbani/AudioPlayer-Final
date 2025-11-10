@@ -152,20 +152,24 @@ public class Artista implements IIdentificador {
         if(cancion == null)
             throw new IllegalArgumentException("Se debe enviar una canción");
 
-        Album albumSingle = albums.get(cancion.getNombre());
-        if(albums == null){
-            albumSingle = new Album(cancion.getNombre(), cancion.getFechaPublicacion(), "Independiente");
-            albums.put(albumSingle.getNombre(), albumSingle);
-        } else {
-            throw new ElementoDuplicadoException("La cancion ya pertenece al artista");
-        }
-        try {
-            albumSingle.agregarCancion(cancion);
-        } catch (Exception e) {
-            throw new RuntimeException("No se pudo agregar la canción al álbum: " + e.getMessage());
+        for (Album a : albums.values()) {
+            if (a.contieneCancion(cancion)) {
+                throw new ElementoDuplicadoException("La canción ya pertenece al artista.");
+            }
         }
 
-        cancion.setAlbum(albumSingle);
+        Album albumSingle = new Album(
+                cancion.getNombre(),
+                cancion.getFechaPublicacion(),
+                "Independiente"
+        );
+
+        if (cancion.getGenero() != null) {
+            generos.add(cancion.getGenero());
+        }
+
+        albumSingle.agregarCancion(cancion);
+        albums.put(albumSingle.getNombre(), albumSingle);
     }
 
     public JSONObject toJSON() {

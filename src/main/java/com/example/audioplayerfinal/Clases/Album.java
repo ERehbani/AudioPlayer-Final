@@ -150,6 +150,10 @@ public class Album implements IMetodosCancion, IIdentificador {
             throw new CancionNoExistenteException("La cacnion ya esta en el album");
         }
         listaDeCanciones.put(cancion.getNombre(), cancion);
+
+        if (cancion.getGenero() != null) {
+            generos.add(cancion.getGenero());
+        }
     }
 
     ///Eliminar canciones
@@ -175,11 +179,15 @@ public class Album implements IMetodosCancion, IIdentificador {
     }
 
     public void agregarArtista(Artista artista) throws ArtistaIncluidoException {
-        if (artista == null || artistas.containsValue(artista)) {
-            throw new ArtistaIncluidoException("La artista esta en el album");
+        if (artista == null) {
+            throw new IllegalArgumentException("El artista no puede ser nulo");
+        }
+        if (artistas.containsKey(artista.getNombre())) {
+            throw new ArtistaIncluidoException("El artista ya está en el álbum");
         }
         artistas.put(artista.getNombre(), artista);
     }
+
     public void eliminarArtista(Artista artista) throws ArtistaNoIncluidoException {
         if (artista == null || !artistas.containsValue(artista)) {
             throw new ArtistaNoIncluidoException("La artista no esta en el album");
@@ -199,6 +207,13 @@ public class Album implements IMetodosCancion, IIdentificador {
             throw new GeneroNoExistenteException("La genero no esta en el album");
         }
         generos.remove(gen);
+    }
+
+    public boolean contieneCancion(Cancion cancion) {
+        if (cancion == null){
+            return false;
+        }
+        return listaDeCanciones.containsKey(cancion.getNombre());
     }
 
     public JSONObject toJSON() {

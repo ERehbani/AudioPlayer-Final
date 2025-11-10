@@ -35,6 +35,10 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         this.fechaPublicacion = fechaPublicacion;
     }
 
+    public void grabar() {
+
+    }
+
     public String getRutaArchivo() {
         return rutaArchivo;
     }
@@ -119,6 +123,11 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         return sb.toString();
     }
 
+
+    public int cantidadDeReproducciones() {
+        return cantidadReproducciones;
+    }
+
     public boolean reproducir() {
         return false;
     }
@@ -183,6 +192,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         json.put("id", id);
         json.put("nombre", getNombre());
         json.put("duracion", getDuracion());
+        json.put("artista", artista.getNombre());
         json.put("genero", genero.getGenero());
         json.put("rutaArchivo", rutaArchivo);
         json.put("cantidadReproducciones", cantidadReproducciones);
@@ -202,6 +212,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         String nombre = json.getString("nombre");
         int duracion = json.getInt("duracion");
         String generoStr = json.getString("genero");
+        String artista = json.getString("artista");
         EGenero genero = null;
         for (EGenero g : EGenero.values()) {
             if (g.getGenero().equalsIgnoreCase(generoStr)) {
@@ -214,7 +225,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         String fechaPublicacion = json.getString("fechaPublicacion");
 
         Cancion c = new Cancion(nombre, duracion, genero, rutaArchivo, cantidadReproducciones, fechaPublicacion);
-
+        c.setArtista(new Artista(artista));
         JSONArray colabs = json.optJSONArray("colaboradores");
         if (colabs != null) {
             for (int i = 0; i < colabs.length(); i++) {
@@ -234,7 +245,10 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
     public String toString() {
         return "Cancion{" +
                 "id=" + id +
+                ", nombre=" + getNombre() +
+                ", duracion=" + getDuracion() +
                 ", genero=" + genero +
+                ", artista=" + artista.getNombre() +
                 ", colaboradores=" + colaboradores +
                 ", cantidadReproducciones=" + cantidadReproducciones +
                 ", fechaPublicacion='" + fechaPublicacion + '\'' +
