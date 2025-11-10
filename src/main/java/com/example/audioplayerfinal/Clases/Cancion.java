@@ -29,7 +29,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         super(nombre, duracion);
         this.id = contador++;
         this.genero = genero;
-        this.rutaArchivo = rutaArchivo;
+        this.rutaArchivo = ruta;
         this.colaboradores = new HashSet<Artista>();
         this.cantidadReproducciones = cantidadReproducciones;
         this.fechaPublicacion = fechaPublicacion;
@@ -165,6 +165,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         }
 
         colaboradores.add(artista);
+
         return true;
     }
 
@@ -208,7 +209,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
                 break;
             }
         }
-        String rutaArchivo = json.optString("rutaArchivo", "");
+        String rutaArchivo = json.optString("rutaArchivo");
         int cantidadReproducciones = json.getInt("cantidadReproducciones");
         String fechaPublicacion = json.getString("fechaPublicacion");
 
@@ -225,6 +226,9 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         }
         return c;
     }
+
+
+
 
     @Override
     public String toString() {

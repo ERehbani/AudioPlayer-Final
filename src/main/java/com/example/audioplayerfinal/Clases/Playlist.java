@@ -52,6 +52,17 @@ public class Playlist implements IMetodosCancion, IIdentificador {
         return sb.toString();
     }
 
+    public List<Cancion> getCanciones() throws PlaylistVaciaException {
+        ArrayList<Cancion> listaCanciones = new ArrayList<>();
+        if(canciones.isEmpty()){
+            throw new PlaylistVaciaException("La playlist está vacía");
+        }
+        for (Cancion c: canciones) {
+            listaCanciones.add(c);
+        }
+        return listaCanciones;
+    }
+
     @Override
     public void agregarCancion(Cancion cancion) {
         this.canciones.add(cancion);

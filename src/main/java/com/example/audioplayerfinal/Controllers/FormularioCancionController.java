@@ -20,7 +20,7 @@ public class FormularioCancionController {
     public static final List<Cancion> listaCanciones = new ArrayList<>();
 
     @FXML
-    private TextField txtNombre, txtDuracion, txtIdAlbum, txtColaboradores, txtReproducciones;
+    private TextField txtNombre, txtDuracion, txtIdAlbum, txtColaboradores, txtRuta, txtReproducciones;
 
     @FXML
     private ComboBox<EGenero> comboGenero;
@@ -54,7 +54,9 @@ public class FormularioCancionController {
             int reproducciones = Integer.parseInt(txtReproducciones.getText());
             String fecha = datePicker.getValue().toString();
 
-            Cancion nueva = new Cancion(nombre, duracion, genero, reproducciones, fecha);
+            String ruta = txtRuta.getText();
+
+            Cancion nueva = new Cancion(nombre, duracion, genero, ruta, reproducciones, fecha);
             listaCanciones.add(nueva);
 
             lblMensaje.setText("✅ Canción creada: " + nueva.getNombre());

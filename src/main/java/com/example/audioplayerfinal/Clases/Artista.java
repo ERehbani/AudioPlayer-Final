@@ -148,6 +148,26 @@ public class Artista implements IIdentificador {
         generos.remove(Gen);
     }
 
+    public void agregarCancion(Cancion cancion) throws ElementoDuplicadoException {
+        if(cancion == null)
+            throw new IllegalArgumentException("Se debe enviar una canción");
+
+        Album albumSingle = albums.get(cancion.getNombre());
+        if(albums == null){
+            albumSingle = new Album(cancion.getNombre(), cancion.getFechaPublicacion(), "Independiente");
+            albums.put(albumSingle.getNombre(), albumSingle);
+        } else {
+            throw new ElementoDuplicadoException("La cancion ya pertenece al artista");
+        }
+        try {
+            albumSingle.agregarCancion(cancion);
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo agregar la canción al álbum: " + e.getMessage());
+        }
+
+        cancion.setAlbum(albumSingle);
+    }
+
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();
         json.put("id", id);
