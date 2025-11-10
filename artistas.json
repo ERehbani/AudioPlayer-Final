@@ -4,11 +4,35 @@
             "artistas": [],
             "canciones": [{
                 "colaboradores": [],
+                "rutaArchivo": "dtmf.mp3",
+                "artista": "Bad bunny",
+                "genero": "Reggaeton",
+                "duracion": 0,
+                "id": 5,
+                "fechaPublicacion": "2025-02-25",
+                "nombre": "dtmf",
+                "cantidadReproducciones": 1243
+            }],
+            "fechaDePublicacion": "2025-02-25",
+            "discografica": "Independiente",
+            "generos": ["Reggaeton"],
+            "id": 6,
+            "nombre": "dtmf"
+        }],
+        "generos": ["Reggaeton"],
+        "id": 9,
+        "nombre": "Bad bunny"
+    },
+    {
+        "albums": [{
+            "artistas": [],
+            "canciones": [{
+                "colaboradores": [],
                 "rutaArchivo": "New Way Out.mp3",
                 "artista": "Poppy",
                 "genero": "Rock",
                 "duracion": 0,
-                "id": 3,
+                "id": 6,
                 "fechaPublicacion": "2024-11-15",
                 "nombre": "New Way Out",
                 "cantidadReproducciones": 3206975
@@ -32,7 +56,7 @@
                 "artista": "The 1975",
                 "genero": "Indie",
                 "duracion": 0,
-                "id": 4,
+                "id": 7,
                 "fechaPublicacion": "2023-31-11",
                 "nombre": "It's not living",
                 "cantidadReproducciones": 900000

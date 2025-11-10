@@ -22,6 +22,28 @@
         "cantidadReproducciones": 3206975
     },
     {
+        "colaboradores": [],
+        "rutaArchivo": "dtmf.mp3",
+        "artista": "Bad bunny",
+        "genero": "Reggaeton",
+        "duracion": 0,
+        "id": 2,
+        "fechaPublicacion": "2025-02-25",
+        "nombre": "dtmf",
+        "cantidadReproducciones": 1243
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "R U mine?.mp3",
+        "artista": "Arctic monkeys",
+        "genero": "Indie",
+        "duracion": 4,
+        "id": 12,
+        "fechaPublicacion": "2006-11-29",
+        "nombre": "R U mine?",
+        "cantidadReproducciones": 23435
+    },
+    {
         "colaboradores": [
             {
                 "albums": [],
@@ -40,7 +62,7 @@
         "artista": "bad bunny",
         "genero": "Trap",
         "duracion": 0,
-        "id": 2,
+        "id": 3,
         "fechaPublicacion": "2020-02-20",
         "nombre": "yhlqmdlg",
         "cantidadReproducciones": 34253
@@ -50,8 +72,8 @@
         "rutaArchivo": "the cost of giving up.mp3",
         "artista": "Poppy",
         "genero": "Pop",
-        "duracion": 4,
-        "id": 7,
+        "duracion": 0,
+        "id": 4,
         "fechaPublicacion": "2024-11-15",
         "nombre": "the cost of giving up",
         "cantidadReproducciones": 13018438

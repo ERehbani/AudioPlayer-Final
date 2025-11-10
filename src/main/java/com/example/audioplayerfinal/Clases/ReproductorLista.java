@@ -1,94 +1,96 @@
 package com.example.audioplayerfinal.Clases;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
 import java.util.List;
 
 public class ReproductorLista {
 
     private List<Cancion> lista;
     private int indiceActual = 0;
-    private MediaPlayer player;
+    private boolean enReproduccion = false;
+    private boolean pausado = false;
 
     public void setLista(List<Cancion> canciones) {
         this.lista = canciones;
         this.indiceActual = 0;
     }
 
-
-    // reproducir cancion actual
     public void reproducirActual() {
         if (lista == null || lista.isEmpty()) {
             System.out.println("❌ No hay canciones para reproducir.");
             return;
         }
 
-            Cancion c = lista.get(indiceActual);
-            File archivo = new File(c.getRutaArchivo());
-
-        if (!archivo.exists()) {
-            System.out.println("⚠️ Archivo no encontrado: " + archivo.getAbsolutePath());
-            siguiente();
-            return;
-        }
-
-        try {
-            detener(); // detener lo anterior
-            Media media = new Media(archivo.toURI().toString());
-            player = new MediaPlayer(media);
-            player.play();
-            System.out.println("▶ Reproduciendo (" + (indiceActual + 1) + "/" + lista.size() + "): " + c.getNombre());
-
-            player.setOnEndOfMedia(this::siguiente);
-        } catch (Exception e) {
-            System.out.println("❌ Error al reproducir: " + e.getMessage());
-        }
+        Cancion c = lista.get(indiceActual);
+        enReproduccion = true;
+        pausado = false;
+        System.out.println("Reproduciendo (" + (indiceActual + 1) + "/" + lista.size() + "): " + c.getNombre());
     }
 
     public void siguiente() {
-        if (lista == null || lista.isEmpty()) return;
-
-        indiceActual++;
-        if (indiceActual >= lista.size()) {
-            System.out.println("🏁 Fin de la lista.");
-            indiceActual = lista.size() - 1;
+        if (lista == null || lista.isEmpty()) {
+            System.out.println("No hay canciones en la lista.");
             return;
         }
-        reproducirActual();
+
+        if (indiceActual < lista.size() - 1) {
+            indiceActual++;
+            reproducirActual();
+        } else {
+            System.out.println("Fin de la lista.");
+        }
     }
 
     public void anterior() {
-        if (lista == null || lista.isEmpty()) return;
-
-        indiceActual--;
-        if (indiceActual < 0) {
-            System.out.println("🚫 Ya estás en la primera canción.");
-            indiceActual = 0;
+        if (lista == null || lista.isEmpty()) {
+            System.out.println("No hay canciones en la lista.");
             return;
         }
-        reproducirActual();
+
+        if (indiceActual > 0) {
+            indiceActual--;
+            reproducirActual();
+        } else {
+            System.out.println("Ya estás en la primera canción.");
+        }
     }
 
     public void pausar() {
-        if (player != null) {
-            player.pause();
-            System.out.println("⏸ Reproducción pausada.");
+        if (!enReproduccion) {
+            System.out.println("No hay ninguna canción reproduciéndose.");
+            return;
+        }
+
+        if (!pausado) {
+            pausado = true;
+            System.out.println("Reproducción pausada: " + lista.get(indiceActual).getNombre());
+        } else {
+            System.out.println("Ya está pausada.");
         }
     }
 
     public void continuar() {
-        if (player != null) {
-            player.play();
-            System.out.println("▶ Reproducción reanudada.");
+        if (!enReproduccion) {
+            System.out.println("No hay canción en reproducción.");
+            return;
+        }
+
+        if (pausado) {
+            pausado = false;
+            System.out.println("Reproducción reanudada: " + lista.get(indiceActual).getNombre());
+        } else {
+            System.out.println("La canción ya está reproduciéndose.");
         }
     }
 
     public void detener() {
-        if (player != null) {
-            player.stop();
-            System.out.println("⏹ Reproducción detenida.");
+        if (!enReproduccion) {
+            System.out.println("No hay canción en reproducción.");
+            return;
         }
+
+        enReproduccion = false;
+        pausado = false;
+        System.out.println(" Reproducción detenida.");
     }
 
     public Cancion getCancionActual() {
