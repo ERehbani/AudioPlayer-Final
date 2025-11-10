@@ -102,6 +102,16 @@ public class Playlist implements IMetodosCancion, IIdentificador {
         return playlist;
     }
 
+    public void eliminarCancionPorNombre(String nombreCancion) {
+        for (int i = 0; i < canciones.size(); i++) {
+            Cancion c = canciones.get(i);
+            if (c.getNombre().equalsIgnoreCase(nombreCancion)) {
+                canciones.remove(i);
+                break; // sale después de eliminar la primera coincidencia
+            }
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Playlist playlist)) return false;

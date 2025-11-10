@@ -59,6 +59,6 @@ public class PersistenciaDatos {
         return new File("canciones.json").exists() ||
                 new File("artistas.json").exists() ||
                 new File("playlists.json").exists()||
-                new File("albums.json").exists();
+                new File("albumes.json").exists();
     }
 }

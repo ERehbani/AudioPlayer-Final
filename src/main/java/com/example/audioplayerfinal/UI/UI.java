@@ -65,6 +65,7 @@ public class UI {
             System.out.println("1. Buscar canción");
             System.out.println("2. Crear nueva canción");
             System.out.println("3. Listar todas las canciones");
+            System.out.println("4. Eliminar canción");
             System.out.println("0. Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
@@ -73,6 +74,7 @@ public class UI {
                 case 1 -> submenuBuscarCancion();
                 case 2 -> crearCancionConsola();
                 case 3 -> listarCancionesConsola();
+                case 4 -> eliminarCancionConsola();
                 case 0 -> System.out.println("↩ Volviendo al menú principal...");
                 default -> System.out.println("❌ Opción inválida.");
             }
@@ -125,6 +127,8 @@ public class UI {
             System.out.println("2. Buscar álbum");
             System.out.println("3. Crear nuevo artista");
             System.out.println("4. Crear nuevo álbum");
+            System.out.println("5. Eliminar artista");
+            System.out.println("6. Eliminar álbum");
             System.out.println("0. Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
@@ -134,6 +138,8 @@ public class UI {
                 case 2 -> buscarAlbumConsola();
                 case 3 -> crearArtistaConsola();
                 case 4 -> crearAlbumConsola();
+                case 5 -> eliminarArtistaConsola();
+                case 6 -> eliminarAlbumConsola();
                 case 0 -> System.out.println("↩ Volviendo...");
                 default -> System.out.println("❌ Opción inválida.");
             }
@@ -151,6 +157,7 @@ public class UI {
             System.out.println("2. Ver playlists");
             System.out.println("3. Agregar canción a playlist");
             System.out.println("4. Reproducir playlist");
+            System.out.println("5. Eliminar playlist");
             System.out.println("0. Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
@@ -160,6 +167,7 @@ public class UI {
                 case 2 -> listarPlaylistsConsola();
                 case 3 -> agregarCancionAPlaylistConsola();
                 case 4 -> submenuReproducirPlaylist();
+                case 5 -> eliminarPlaylistConsola();
                 case 0 -> System.out.println("↩ Volviendo...");
                 default -> System.out.println("❌ Opción inválida.");
             }
@@ -513,4 +521,51 @@ public class UI {
             System.out.println("❌ Error: " + e.getMessage());
         }
     }
+
+
+
+    private static void eliminarCancionConsola() {
+        System.out.print("Ingrese el nombre de la canción a eliminar: ");
+        String nombre = sc.nextLine();
+        try {
+            servicio.eliminarCancion(nombre);
+            System.out.println("✅ Canción eliminada correctamente.");
+        } catch (Exception e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+
+    private static void eliminarArtistaConsola() {
+        System.out.print("Ingrese el nombre del artista a eliminar: ");
+        String nombre = sc.nextLine();
+        try {
+            servicio.eliminarArtista(nombre);
+            System.out.println("✅ Artista eliminado correctamente.");
+        } catch (Exception e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+
+    private static void eliminarAlbumConsola() {
+        System.out.print("Ingrese el nombre del álbum a eliminar: ");
+        String nombre = sc.nextLine();
+        try {
+            servicio.eliminarAlbum(nombre);
+            System.out.println("✅ Álbum eliminado correctamente.");
+        } catch (Exception e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+
+    private static void eliminarPlaylistConsola() {
+        System.out.print("Ingrese el nombre de la playlist a eliminar: ");
+        String nombre = sc.nextLine();
+        try {
+            servicio.eliminarPlaylist(nombre);
+            System.out.println("✅ Playlist eliminada correctamente.");
+        } catch (Exception e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+
 }
