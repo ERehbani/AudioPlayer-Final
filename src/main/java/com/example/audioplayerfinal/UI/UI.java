@@ -330,6 +330,8 @@ public class UI {
                     nueva.agregarArtista(colaborador);
                     colaborador.agregarGenero(genero);
 
+                    colaborador.agregarCancion(nueva, servicio);
+
                     System.out.print("¿Agregar otro colaborador? (S/N): ");
                     agregarMas = sc.nextLine().trim().equalsIgnoreCase("S");
                 }
@@ -613,6 +615,5 @@ public class UI {
             System.out.println("❌ Error al reproducir el álbum: " + e.getMessage());
         }
     }
-
 
 }
