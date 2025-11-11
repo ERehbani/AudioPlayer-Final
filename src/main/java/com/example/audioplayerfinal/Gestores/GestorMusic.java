@@ -74,27 +74,14 @@ public class GestorMusic {
             throw new ElementoDuplicadoException("Ya existe una canción con el nombre: " + nombre);
 
         Cancion nueva = new Cancion(nombre, duracionSeg, genero, ruta, cantReproducciones, fecha);
-        Album albumAsociado = albumesPorNombre.get(clave);
 
-        if (albumAsociado == null) {
-            albumAsociado = new Album(nombre, fecha, "Single");
-            repoAlbumes.agregar(albumAsociado.getId(), albumAsociado);
-            albumesPorNombre.put(clave, albumAsociado);
-        }
-
-        try {
-            albumAsociado.agregarCancion(nueva);
-        } catch (CancionNoExistenteException e) {
-            throw new CancionNoExistenteException("Error al agregar la canción al álbum: " + e.getMessage());
-        }
-
-        nueva.setAlbum(albumAsociado);
         repoCanciones.agregar(nueva.getId(), nueva);
         cancionesPorNombre.put(clave, nueva);
-
         cancionesPorGenero.computeIfAbsent(genero, k -> new HashSet<>()).add(nueva);
+
         return nueva;
     }
+
 
     public Playlist crearPlaylist(String nombre) throws ElementoDuplicadoException, RepositorioNoExisteException {
         String clave = TextoUtils.normalizarTexto(nombre);
