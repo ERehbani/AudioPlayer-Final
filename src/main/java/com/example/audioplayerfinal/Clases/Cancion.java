@@ -207,6 +207,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         return json;
     }
 
+
     public static Cancion fromJSON(JSONObject json) {
         int id = json.getInt("id");
         String nombre = json.getString("nombre");
@@ -239,8 +240,6 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         }
         return c;
     }
-
-
 
 
     @Override

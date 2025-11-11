@@ -86,7 +86,6 @@ public class Playlist implements IMetodosCancion, IIdentificador {
         return obj;
     }
 
-    // 🔽 MÉTODO FROM JSON
     public static Playlist fromJSON(JSONObject obj) {
         int id = obj.getInt("id");
         String nombre = obj.getString("nombre");
@@ -107,7 +106,7 @@ public class Playlist implements IMetodosCancion, IIdentificador {
             Cancion c = canciones.get(i);
             if (c.getNombre().equalsIgnoreCase(nombreCancion)) {
                 canciones.remove(i);
-                break; // sale después de eliminar la primera coincidencia
+                break;
             }
         }
     }
