@@ -46,7 +46,7 @@ public class Playlist implements IMetodosCancion, IIdentificador {
         }
         sb.append("Canciones de la playlist: ");
         for (Cancion c: canciones){
-            sb.append(c.getNombre()).append(" - ");
+            sb.append(c.getNombre()).append("-");
         }
 
         return sb.toString();
