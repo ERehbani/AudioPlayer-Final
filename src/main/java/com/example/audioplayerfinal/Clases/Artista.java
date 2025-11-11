@@ -46,14 +46,10 @@ public class Artista implements IIdentificador {
         this.nombre = nombre;
     }
 
-    public String getGeneros() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("GENEROS DE ").append(nombre).append(":\n");
-        for (EGenero genero: generos){
-            sb.append(genero.getGenero()).append("\n");
-        }
-        return sb.toString();
+    public Set<EGenero> getGenerosSet() {
+        return generos;
     }
+
 
     public void setGeneros(Set<EGenero> generos) {
         this.generos = generos;

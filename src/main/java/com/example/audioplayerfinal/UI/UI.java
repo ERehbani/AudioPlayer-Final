@@ -295,6 +295,7 @@ public class UI {
             }
             System.out.print("Seleccione un género: ");
             EGenero genero = EGenero.valueOf(sc.nextLine().toUpperCase());
+            artista.agregarGenero(genero);
 
             System.out.print("Fecha de publicación (YYYY-MM-DD): ");
             String fecha = sc.nextLine();
@@ -328,12 +329,18 @@ public class UI {
                     }
 
                     nueva.agregarArtista(colaborador);
-                    colaborador.agregarGenero(genero);
+                    colaborador.agregarCancion(nueva, servicio);
+                    if (!colaborador.getGenerosSet().contains(genero)) {
+                        colaborador.agregarGenero(genero);
+                    }
+
 
                     System.out.print("¿Agregar otro colaborador? (S/N): ");
                     agregarMas = sc.nextLine().trim().equalsIgnoreCase("S");
                 }
             }
+
+
 
             System.out.print("¿Pertenece a un álbum existente? (S/N): ");
             String respuesta = sc.nextLine().trim().toUpperCase();
@@ -355,11 +362,13 @@ public class UI {
                         if (!album.getArtistas().containsValue(colab)) {
                             album.agregarArtista(colab);
                         }
+                        colab.agregarCancion(nueva, servicio);
                     }
+
                     System.out.println("📀 Canción agregada al álbum " + album.getNombre());
                 } catch (ElementoNoExisteException e) {
                     System.out.println("Album no encontrado, creando uno nuevo...");
-                    Album albumCreado = servicio.crearAlbum(nombreAlbum, fecha, " ");
+                    Album albumCreado = servicio.crearAlbum(nombreAlbum, fecha, "Independiente");
                     albumCreado.agregarCancion(nueva);
                     nueva.setAlbum(albumCreado);
                     artista.agregarAlbum(albumCreado);
@@ -377,6 +386,25 @@ public class UI {
                     System.out.println("📀 Canción agregada al álbum " + albumCreado.getNombre());
                 }
             } else {
+                // Crear un álbum "Single" para la canción
+                Album albumSingle = servicio.crearAlbum(nueva.getNombre(), fecha, "Single");
+                albumSingle.agregarCancion(nueva);
+                nueva.setAlbum(albumSingle);
+
+                // Asociar artista y álbum mutuamente
+                artista.agregarCancion(nueva, servicio);
+                artista.agregarAlbum(albumSingle);
+
+                if (!albumSingle.getArtistas().containsValue(artista)) {
+                    albumSingle.agregarArtista(artista);
+                }
+
+                // También agregar los colaboradores al álbum
+                for (Artista colab : nueva.getColaboradores()) {
+                    if (!albumSingle.getArtistas().containsValue(colab)) {
+                        albumSingle.agregarArtista(colab);
+                    }
+                }
                 artista.agregarCancion(nueva, servicio);
                 System.out.println("🎵 Canción registrada como single.");
             }
