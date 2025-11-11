@@ -8,6 +8,8 @@ import java.util.HashSet;
 
 public class PersistenciaDatos {
 
+
+    // serializa servicio
     public static void guardarTodo(GestorMusic servicio) {
         try {
             GestorJSON.grabarArchivo(servicio.getCanciones(), "canciones.json");
@@ -20,6 +22,8 @@ public class PersistenciaDatos {
         }
 
     }
+
+    // deserializa servicio
 
     public static void cargarTodo(GestorMusic servicio) {
         try {
