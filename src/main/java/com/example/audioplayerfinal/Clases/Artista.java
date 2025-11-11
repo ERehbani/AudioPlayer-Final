@@ -82,7 +82,7 @@ public class Artista implements IIdentificador {
         sb.append("\nCanciones: ");
 
         if (albums.isEmpty()) {
-            throw new ColeccionVaciaException("No tiene canciones ");
+            System.out.println("No tiene canciones ");
         } else {
             for (Map.Entry<String, Album> entry : albums.entrySet()) {
                 sb.append(entry.getValue().mostrarCancion());

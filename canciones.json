@@ -1,17 +1,6 @@
 [
     {
         "colaboradores": [],
-        "rutaArchivo": "It's not living.mp3",
-        "artista": "The 1975",
-        "genero": "Indie",
-        "duracion": 0,
-        "id": 0,
-        "fechaPublicacion": "2023-31-11",
-        "nombre": "It's not living",
-        "cantidadReproducciones": 900000
-    },
-    {
-        "colaboradores": [],
         "rutaArchivo": "New Way Out.mp3",
         "artista": "Poppy",
         "genero": "Rock",
@@ -34,14 +23,47 @@
     },
     {
         "colaboradores": [],
-        "rutaArchivo": "R U mine?.mp3",
-        "artista": "Arctic monkeys",
-        "genero": "Indie",
+        "rutaArchivo": "Hell You Call A Dream.mp3",
+        "artista": "The Warning",
+        "genero": "Rock",
+        "duracion": 5,
+        "id": 13,
+        "fechaPublicacion": "2024-06-28",
+        "nombre": "Hell You Call A Dream",
+        "cantidadReproducciones": 22879714
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Consume.mp3",
+        "artista": "The Warning",
+        "genero": "Metal",
+        "duracion": 3,
+        "id": 15,
+        "fechaPublicacion": "2024-06-08",
+        "nombre": "Consume",
+        "cantidadReproducciones": 7645658
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Alejandro.mp3",
+        "artista": "Lady Gaga",
+        "genero": "Pop",
         "duracion": 4,
-        "id": 12,
-        "fechaPublicacion": "2006-11-29",
-        "nombre": "R U mine?",
-        "cantidadReproducciones": 23435
+        "id": 20,
+        "fechaPublicacion": "2009-11-05",
+        "nombre": "Alejandro",
+        "cantidadReproducciones": 79562991
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Telephone.mp3",
+        "artista": "Lady Gaga",
+        "genero": "Pop",
+        "duracion": 3,
+        "id": 23,
+        "fechaPublicacion": "2009-11-05",
+        "nombre": "Telephone",
+        "cantidadReproducciones": 92508649
     },
     {
         "colaboradores": [
@@ -62,10 +84,26 @@
         "artista": "bad bunny",
         "genero": "Trap",
         "duracion": 0,
-        "id": 3,
+        "id": 4,
         "fechaPublicacion": "2020-02-20",
         "nombre": "yhlqmdlg",
         "cantidadReproducciones": 34253
+    },
+    {
+        "colaboradores": [{
+            "albums": [],
+            "generos": ["Pop"],
+            "id": 17,
+            "nombre": "Colby O'Donis"
+        }],
+        "rutaArchivo": "Just Dance.mp3",
+        "artista": "Lady Gaga",
+        "genero": "Pop",
+        "duracion": 4,
+        "id": 24,
+        "fechaPublicacion": "2009-11-05",
+        "nombre": "Just Dance",
+        "cantidadReproducciones": 71502559
     },
     {
         "colaboradores": [],
@@ -73,9 +111,113 @@
         "artista": "Poppy",
         "genero": "Pop",
         "duracion": 0,
-        "id": 4,
+        "id": 5,
         "fechaPublicacion": "2024-11-15",
         "nombre": "the cost of giving up",
         "cantidadReproducciones": 13018438
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Apologize.mp3",
+        "artista": "The Warning",
+        "genero": "Rock",
+        "duracion": 3,
+        "id": 16,
+        "fechaPublicacion": "2024-06-28",
+        "nombre": "Apologize",
+        "cantidadReproducciones": 4510752
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Paparazzi.mp3",
+        "artista": "Lady Gaga",
+        "genero": "Pop",
+        "duracion": 3,
+        "id": 21,
+        "fechaPublicacion": "2009-11-05",
+        "nombre": "Paparazzi",
+        "cantidadReproducciones": 15064403
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Hell Above.mp3",
+        "artista": "Pierce the Veil",
+        "genero": "Rock",
+        "duracion": 3,
+        "id": 17,
+        "fechaPublicacion": "2012-06-17",
+        "nombre": "Hell Above",
+        "cantidadReproducciones": 75467543
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Automatic Sun.mp3",
+        "artista": "The Warning",
+        "genero": "Metal",
+        "duracion": 3,
+        "id": 14,
+        "fechaPublicacion": "2024-06-28",
+        "nombre": "Automatic Sun",
+        "cantidadReproducciones": 14887177
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "It's not living.mp3",
+        "artista": "The 1975",
+        "genero": "Indie",
+        "duracion": 0,
+        "id": 0,
+        "fechaPublicacion": "2023-31-11",
+        "nombre": "It's not living",
+        "cantidadReproducciones": 900000
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "R U mine?.mp3",
+        "artista": "Arctic monkeys",
+        "genero": "Indie",
+        "duracion": 0,
+        "id": 3,
+        "fechaPublicacion": "2006-11-29",
+        "nombre": "R U mine?",
+        "cantidadReproducciones": 23435
+    },
+    {
+        "colaboradores": [{
+            "albums": [],
+            "generos": ["Metal"],
+            "id": 15,
+            "nombre": "Kellin Quinn"
+        }],
+        "rutaArchivo": "King For A Day.mp3",
+        "artista": "Pierce the Veil",
+        "genero": "Metal",
+        "duracion": 4,
+        "id": 18,
+        "fechaPublicacion": "2012-06-17",
+        "nombre": "King For A Day",
+        "cantidadReproducciones": 84296400
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Bad Romance.mp3",
+        "artista": "Lady Gaga",
+        "genero": "Pop",
+        "duracion": 4,
+        "id": 19,
+        "fechaPublicacion": "2009-11-05",
+        "nombre": "Bad Romance",
+        "cantidadReproducciones": 99047034
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Poker Face.mp3",
+        "artista": "Lady Gaga",
+        "genero": "Pop",
+        "duracion": 3,
+        "id": 22,
+        "fechaPublicacion": "2009-11-05",
+        "nombre": "Poker Face",
+        "cantidadReproducciones": 23483647
     }
 ]
