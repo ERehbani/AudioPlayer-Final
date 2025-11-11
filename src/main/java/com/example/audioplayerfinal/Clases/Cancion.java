@@ -232,11 +232,10 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
             for (int i = 0; i < colabs.length(); i++) {
                 JSONObject jsonArtista = colabs.getJSONObject(i);
                 Artista a = Artista.fromJSON(jsonArtista);
-                // Evitar duplicados o errores
                 if (c.getArtista() != null && c.getArtista().getNombre().equalsIgnoreCase(a.getNombre())) {
-                    continue; // Ignora si es el mismo artista principal
+                    continue;
                 }
-                c.getColaboradores().add(a); // agrega directamente sin usar agregarArtista()
+                c.getColaboradores().add(a);
             }
         }
         return c;

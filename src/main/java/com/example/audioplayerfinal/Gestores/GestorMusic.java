@@ -67,7 +67,7 @@ public class GestorMusic {
     }
 
     public Cancion crearCancion(String nombre, int duracionSeg, EGenero genero, String ruta, int cantReproducciones, String fecha)
-            throws ElementoDuplicadoException, RepositorioNoExisteException, CancionNoExistenteException {
+            throws ElementoDuplicadoException, RepositorioNoExisteException {
 
         String clave = TextoUtils.normalizarTexto(nombre);
         if (cancionesPorNombre.containsKey(clave))
