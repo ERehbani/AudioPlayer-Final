@@ -129,6 +129,7 @@ public class UI {
             System.out.println("4. Crear nuevo álbum");
             System.out.println("5. Eliminar artista");
             System.out.println("6. Eliminar álbum");
+            System.out.println("7. ▶ Reproducir álbum");
             System.out.println("0. Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
@@ -140,6 +141,7 @@ public class UI {
                 case 4 -> crearAlbumConsola();
                 case 5 -> eliminarArtistaConsola();
                 case 6 -> eliminarAlbumConsola();
+                case 7 -> reproducirAlbumConsola();
                 case 0 -> System.out.println("↩ Volviendo...");
                 default -> System.out.println("❌ Opción inválida.");
             }
@@ -327,7 +329,7 @@ public class UI {
                     }
 
                     nueva.agregarArtista(colaborador);
-                    colaborador.agregarCancion(nueva);
+                    colaborador.agregarCancion(nueva, servicio);
                     if (!colaborador.getGenerosSet().contains(genero)) {
                         colaborador.agregarGenero(genero);
                     }
@@ -360,7 +362,7 @@ public class UI {
                         if (!album.getArtistas().containsValue(colab)) {
                             album.agregarArtista(colab);
                         }
-                        colab.agregarCancion(nueva);
+                        colab.agregarCancion(nueva, servicio);
                     }
 
                     System.out.println("📀 Canción agregada al álbum " + album.getNombre());
@@ -390,7 +392,7 @@ public class UI {
                 nueva.setAlbum(albumSingle);
 
                 // Asociar artista y álbum mutuamente
-                artista.agregarCancion(nueva);
+                artista.agregarCancion(nueva, servicio);
                 artista.agregarAlbum(albumSingle);
 
                 if (!albumSingle.getArtistas().containsValue(artista)) {
@@ -403,10 +405,11 @@ public class UI {
                         albumSingle.agregarArtista(colab);
                     }
                 }
-
-                System.out.println("🎵 Canción registrada como single en el álbum " + albumSingle.getNombre());
+                artista.agregarCancion(nueva, servicio);
+                System.out.println("🎵 Canción registrada como single.");
             }
 
+            System.out.println("✅ Canción creada: " + nueva.getNombre());
         } catch (Exception e) {
             System.out.println("❌ Error: " + e.getMessage());
         }
@@ -591,5 +594,53 @@ public class UI {
             System.out.println("❌ " + e.getMessage());
         }
     }
+
+    private static void reproducirAlbumConsola() {
+        System.out.print("Ingrese el nombre del álbum a reproducir: ");
+        String nombre = sc.nextLine();
+
+        try {
+            Album album = servicio.buscarAlbumPorNombre(nombre);
+
+            if (album == null || album.cantidadDeCanciones() == 0) {
+                System.out.println("🎧 El álbum no tiene canciones para reproducir.");
+                return;
+            }
+
+            List<Cancion> cancionesAlbum = new ArrayList<>(album.getListaDeCanciones().values());
+
+            listaPlayer.setLista(cancionesAlbum);
+            listaPlayer.reproducirActual();
+
+            int opcion;
+            do {
+                System.out.println("\n🎶 Reproduciendo álbum: " + album.getNombre());
+                System.out.println("1. ⏭ Siguiente");
+                System.out.println("2. ⏮ Anterior");
+                System.out.println("3. ⏸ Pausar");
+                System.out.println("4. ▶ Continuar");
+                System.out.println("5. ⏹ Detener");
+                System.out.println("0. Volver");
+                System.out.print("Seleccione: ");
+                opcion = Integer.parseInt(sc.nextLine());
+
+                switch (opcion) {
+                    case 1 -> listaPlayer.siguiente();
+                    case 2 -> listaPlayer.anterior();
+                    case 3 -> listaPlayer.pausar();
+                    case 4 -> listaPlayer.continuar();
+                    case 5 -> listaPlayer.detener();
+                    case 0 -> System.out.println("↩ Volviendo al menú álbumes...");
+                    default -> System.out.println("❌ Opción inválida.");
+                }
+            } while (opcion != 0);
+
+        } catch (ElementoNoExisteException e) {
+            System.out.println("❌ No se encontró el álbum: " + nombre);
+        } catch (Exception e) {
+            System.out.println("❌ Error al reproducir el álbum: " + e.getMessage());
+        }
+    }
+
 
 }

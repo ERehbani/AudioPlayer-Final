@@ -38,12 +38,8 @@ public class Album implements IMetodosCancion, IIdentificador {
         return nombre;
     }
 
-    public String getListaDeCanciones() {
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Cancion> entry: listaDeCanciones.entrySet()){
-            sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
-        }
-        return sb.toString();
+    public Map<String, Cancion> getListaDeCanciones() {
+        return listaDeCanciones;
     }
 
     public Set<EGenero> getGeneros() {
