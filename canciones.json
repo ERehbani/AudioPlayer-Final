@@ -64,6 +64,14 @@
         "fechaPublicacion": "2009-11-05",
         "nombre": "Telephone",
         "cantidadReproducciones": 92508649
+        "rutaArchivo": "R U mine?.mp3",
+        "artista": "Arctic monkeys",
+        "genero": "Indie",
+        "duracion": 0,
+        "id": 3,
+        "fechaPublicacion": "2006-11-29",
+        "nombre": "R U mine?",
+        "cantidadReproducciones": 23435
     },
     {
         "colaboradores": [
