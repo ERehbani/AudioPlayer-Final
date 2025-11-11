@@ -2,6 +2,7 @@ package com.example.audioplayerfinal.Clases;
 
 import com.example.audioplayerfinal.ENums.EGenero;
 import com.example.audioplayerfinal.Exceptions.*;
+import com.example.audioplayerfinal.Gestores.GestorMusic;
 import com.example.audioplayerfinal.Interfaces.IIdentificador;
 import com.example.audioplayerfinal.Utils.TextoUtils;
 import org.json.JSONArray;
@@ -35,6 +36,10 @@ public class Artista implements IIdentificador {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public Map<String, Album> getAlbums() {
+        return albums;
     }
 
     public void setNombre(String nombre) {
@@ -152,8 +157,8 @@ public class Artista implements IIdentificador {
         generos.remove(Gen);
     }
 
-    public void agregarCancion(Cancion cancion) throws ElementoDuplicadoException {
-        if(cancion == null)
+    public void agregarCancion(Cancion cancion, GestorMusic gestor) throws ElementoDuplicadoException {
+        if (cancion == null)
             throw new IllegalArgumentException("Se debe enviar una canción");
 
         for (Album a : albums.values()) {
@@ -161,26 +166,37 @@ public class Artista implements IIdentificador {
                 throw new ElementoDuplicadoException("La canción ya pertenece al artista.");
             }
         }
-
         Album albumSingle = new Album(
                 cancion.getNombre(),
                 cancion.getFechaPublicacion(),
-                "Independiente"
+                "Single"
         );
+        try {
+            albumSingle.agregarArtista(this);
+        } catch (ArtistaIncluidoException e) {
+            System.out.println(e.getMessage());
+        }
 
         if (cancion.getGenero() != null) {
             generos.add(cancion.getGenero());
         }
 
-
-        try{
+        try {
             albumSingle.agregarCancion(cancion);
-        }catch (CancionNoExistenteException e){
-            System.out.println("La cancion no existe" + e.getMessage());
+        } catch (CancionNoExistenteException e) {
+            System.out.println("⚠️ " + e.getMessage());
         }
 
+        cancion.setAlbum(albumSingle);
 
         albums.put(albumSingle.getNombre(), albumSingle);
+        if (gestor != null) {
+            try {
+                gestor.agregarAlbum(albumSingle);
+            } catch (ElementoDuplicadoException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public JSONObject toJSON() {
