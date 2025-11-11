@@ -184,7 +184,6 @@ public class UI {
             listaPlayer.setLista(canciones);
             listaPlayer.reproducirActual();
 
-            // Submenu de control mientras se reproduce
             int opcion;
             do {
                 System.out.println("\n🎶 Reproduciendo playlist: " + p.getNombre());
@@ -294,6 +293,7 @@ public class UI {
             }
             System.out.print("Seleccione un género: ");
             EGenero genero = EGenero.valueOf(sc.nextLine().toUpperCase());
+            artista.agregarGenero(genero);
 
             System.out.print("Fecha de publicación (YYYY-MM-DD): ");
             String fecha = sc.nextLine();
@@ -327,12 +327,18 @@ public class UI {
                     }
 
                     nueva.agregarArtista(colaborador);
-                    colaborador.agregarGenero(genero);
+                    colaborador.agregarCancion(nueva);
+                    if (!colaborador.getGenerosSet().contains(genero)) {
+                        colaborador.agregarGenero(genero);
+                    }
+
 
                     System.out.print("¿Agregar otro colaborador? (S/N): ");
                     agregarMas = sc.nextLine().trim().equalsIgnoreCase("S");
                 }
             }
+
+
 
             System.out.print("¿Pertenece a un álbum existente? (S/N): ");
             String respuesta = sc.nextLine().trim().toUpperCase();
@@ -354,7 +360,9 @@ public class UI {
                         if (!album.getArtistas().containsValue(colab)) {
                             album.agregarArtista(colab);
                         }
+                        colab.agregarCancion(nueva);
                     }
+
                     System.out.println("📀 Canción agregada al álbum " + album.getNombre());
                 } catch (ElementoNoExisteException e) {
                     System.out.println("Album no encontrado, creando uno nuevo...");
@@ -449,7 +457,6 @@ public class UI {
                 artista = servicio.crearArtista(nombreArtista);
             }
 
-            // Crear el mapa con el artista principal
             Map<String, Artista> map = new HashMap<>();
             map.put(artista.getNombre(), artista);
 
@@ -462,7 +469,6 @@ public class UI {
             Album a = servicio.crearAlbum(nombre, fecha, discografica);
             a.setArtistas(map);
 
-            // Mantener relación bidireccional
             artista.agregarAlbum(a);
 
             System.out.println("✅ Álbum creado: " + a.getNombre());

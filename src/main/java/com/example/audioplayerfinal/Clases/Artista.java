@@ -41,14 +41,10 @@ public class Artista implements IIdentificador {
         this.nombre = nombre;
     }
 
-    public String getGeneros() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("GENEROS DE ").append(nombre).append(":\n");
-        for (EGenero genero: generos){
-            sb.append(genero.getGenero()).append("\n");
-        }
-        return sb.toString();
+    public Set<EGenero> getGenerosSet() {
+        return generos;
     }
+
 
     public void setGeneros(Set<EGenero> generos) {
         this.generos = generos;
@@ -82,7 +78,7 @@ public class Artista implements IIdentificador {
         sb.append("\nCanciones: ");
 
         if (albums.isEmpty()) {
-            throw new ColeccionVaciaException("No tiene canciones ");
+            System.out.println("No tiene canciones ");
         } else {
             for (Map.Entry<String, Album> entry : albums.entrySet()) {
                 sb.append(entry.getValue().mostrarCancion());
@@ -176,7 +172,7 @@ public class Artista implements IIdentificador {
         try{
             albumSingle.agregarCancion(cancion);
         }catch (CancionNoExistenteException e){
-            e.getMessage();
+            System.out.println("La cancion no existe" + e.getMessage());
         }
 
 
@@ -196,7 +192,7 @@ public class Artista implements IIdentificador {
 
         JSONArray albumsArray = new JSONArray();
         for (Album a : albums.values()) {
-            albumsArray.put(a.toJSON());
+            albumsArray.put(a.getNombre());
         }
         json.put("albums", albumsArray);
 
@@ -220,7 +216,7 @@ public class Artista implements IIdentificador {
                         try {
                             artista.agregarGenero(g);
                         } catch (EGeneroExistenteExcepcion e) {
-                            e.printStackTrace();
+                            System.out.println("El genero ya existe" +e.getMessage());
                         }
                         break;
                     }
@@ -231,12 +227,12 @@ public class Artista implements IIdentificador {
         JSONArray albumsArray = json.optJSONArray("albums");
         if (albumsArray != null) {
             for (int i = 0; i < albumsArray.length(); i++) {
-                JSONObject jsonAlbum = albumsArray.getJSONObject(i);
-                Album album = Album.fromJSON(jsonAlbum);
+                String nombreAlbum = albumsArray.getString(i);
+                Album album = new Album(nombreAlbum, "Desconocida", "Desconocida");
                 try {
                     artista.agregarAlbum(album);
                 } catch (AlbumNoEncontradoExcepcion e) {
-                    e.printStackTrace();
+                    System.out.println("El album no se encuentra" + e.getMessage());
                 }
             }
         }

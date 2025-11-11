@@ -207,6 +207,7 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
         return json;
     }
 
+
     public static Cancion fromJSON(JSONObject json) {
         int id = json.getInt("id");
         String nombre = json.getString("nombre");
@@ -231,16 +232,15 @@ public class Cancion extends ArchivoMultimedia implements IMultimedia, IIdentifi
             for (int i = 0; i < colabs.length(); i++) {
                 JSONObject jsonArtista = colabs.getJSONObject(i);
                 Artista a = Artista.fromJSON(jsonArtista);
+                // Evitar duplicados o errores
                 if (c.getArtista() != null && c.getArtista().getNombre().equalsIgnoreCase(a.getNombre())) {
-                    continue;
+                    continue; // Ignora si es el mismo artista principal
                 }
-                c.getColaboradores().add(a);
+                c.getColaboradores().add(a); // agrega directamente sin usar agregarArtista()
             }
         }
         return c;
     }
-
-
 
 
     @Override

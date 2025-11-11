@@ -204,7 +204,7 @@ public class Album implements IMetodosCancion, IIdentificador {
 
     public void eliminarGenero(EGenero gen) throws GeneroNoExistenteException {
         if (!generos.contains(gen)) {
-            throw new GeneroNoExistenteException("La genero no esta en el album");
+            throw new GeneroNoExistenteException("El genero no esta en el album");
         }
         generos.remove(gen);
     }
@@ -217,34 +217,25 @@ public class Album implements IMetodosCancion, IIdentificador {
     }
 
     public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("id", id);
-        json.put("nombre", nombre);
-        json.put("fechaDePublicacion", fechaDePublicacion);
-        json.put("discografica", discografica);
+        JSONObject obj = new JSONObject();
+        obj.put("id", id);
+        obj.put("nombre", nombre);
+        obj.put("fechaDePublicacion", fechaDePublicacion);
+        obj.put("discografica", discografica);
 
-        // 🔹 Generos
-        JSONArray generosArray = new JSONArray();
-        for (EGenero g : generos) {
-            generosArray.put(g.getGenero()); // Guarda el nombre legible del género
-        }
-        json.put("generos", generosArray);
-
-        // 🔹 Canciones
         JSONArray cancionesArray = new JSONArray();
         for (Cancion c : listaDeCanciones.values()) {
-            cancionesArray.put(c.toJSON()); // se asume que Cancion tiene su propio toJSON()
+            cancionesArray.put(c.toJSON());
         }
-        json.put("canciones", cancionesArray);
+        obj.put("canciones", cancionesArray);
 
-        // 🔹 Artistas
         JSONArray artistasArray = new JSONArray();
         for (Artista a : artistas.values()) {
-            artistasArray.put(a.toJSON()); // se asume que Artista tiene su propio toJSON()
+            artistasArray.put(a.getNombre());
         }
-        json.put("artistas", artistasArray);
+        obj.put("artistas", artistasArray);
 
-        return json;
+        return obj;
     }
 
 
@@ -254,9 +245,8 @@ public class Album implements IMetodosCancion, IIdentificador {
         String discografica = json.getString("discografica");
 
         Album album = new Album(nombre, fecha, discografica);
-        album.id = json.getInt("id"); // asignación directa (no hay setter público)
+        album.id = json.getInt("id");
 
-        // 🔹 Generos
         JSONArray generosArray = json.optJSONArray("generos");
         if (generosArray != null) {
             for (int i = 0; i < generosArray.length(); i++) {
@@ -266,7 +256,7 @@ public class Album implements IMetodosCancion, IIdentificador {
                         try {
                             album.agregarGenero(g);
                         } catch (GeneroNoExistenteException e) {
-                            e.printStackTrace();
+                            System.out.println("El genero no existe" + e.getMessage());
                         }
                         break;
                     }
@@ -274,7 +264,6 @@ public class Album implements IMetodosCancion, IIdentificador {
             }
         }
 
-        // 🔹 Canciones
         JSONArray cancionesArray = json.optJSONArray("canciones");
         if (cancionesArray != null) {
             for (int i = 0; i < cancionesArray.length(); i++) {
@@ -283,7 +272,7 @@ public class Album implements IMetodosCancion, IIdentificador {
                 try {
                     album.agregarCancion(c);
                 } catch (CancionNoExistenteException e) {
-                    e.printStackTrace();
+                    System.out.println("La cancion no existe" + e.getMessage());;
                 }
             }
         }
@@ -291,12 +280,12 @@ public class Album implements IMetodosCancion, IIdentificador {
         JSONArray artistasArray = json.optJSONArray("artistas");
         if (artistasArray != null) {
             for (int i = 0; i < artistasArray.length(); i++) {
-                JSONObject jsonArtista = artistasArray.getJSONObject(i);
-                Artista a = Artista.fromJSON(jsonArtista);
+                String nombreArtista = artistasArray.getString(i);
+                Artista artista = new Artista(nombreArtista);
                 try {
-                    album.agregarArtista(a);
+                    album.agregarArtista(artista);
                 } catch (ArtistaIncluidoException e) {
-                    e.printStackTrace();
+                    System.out.println("El artista no existe" + e.getMessage());;
                 }
             }
         }
