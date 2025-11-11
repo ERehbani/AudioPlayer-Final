@@ -1,0 +1,49 @@
+[{
+    "canciones": [
+        {
+            "colaboradores": [],
+            "rutaArchivo": "Preacher.mp3",
+            "artista": "Years & Years",
+            "genero": "Pop",
+            "duracion": 0,
+            "id": 23,
+            "fechaPublicacion": "2019-02-14",
+            "nombre": "Preacher",
+            "cantidadReproducciones": 8421232
+        },
+        {
+            "colaboradores": [{
+                "albums": ["TENGO TO"],
+                "generos": ["Rap"],
+                "id": 4,
+                "nombre": "Oney1"
+            }],
+            "rutaArchivo": "TENGO TO.mp3",
+            "artista": "Ronpe 99",
+            "genero": "Rap",
+            "duracion": 0,
+            "id": 24,
+            "fechaPublicacion": "2024-09-24",
+            "nombre": "TENGO TO",
+            "cantidadReproducciones": 649153
+        },
+        {
+            "colaboradores": [{
+                "albums": ["ME VAN A ENFERMAR"],
+                "generos": ["Trap"],
+                "id": 3,
+                "nombre": "Dillom"
+            }],
+            "rutaArchivo": "ME VAN A ENFERMAR.mp3",
+            "artista": "Ronpe 99",
+            "genero": "Trap",
+            "duracion": 0,
+            "id": 25,
+            "fechaPublicacion": "2024-09-24",
+            "nombre": "ME VAN A ENFERMAR",
+            "cantidadReproducciones": 681810
+        }
+    ],
+    "id": 0,
+    "nombre": "systemout"
+}]
