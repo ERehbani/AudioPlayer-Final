@@ -1,5 +1,16 @@
 [
     {
+        "colaboradores": [],
+        "rutaArchivo": "Freak.mp3",
+        "artista": "Yuqi",
+        "genero": "Pop",
+        "duracion": 5,
+        "id": 26,
+        "fechaPublicacion": "2024-09-21",
+        "nombre": "Freak",
+        "cantidadReproducciones": 8732492
+    },
+    {
         "colaboradores": [{
             "albums": ["TENGO TO"],
             "generos": ["Rap"],
@@ -25,8 +36,8 @@
         "rutaArchivo": "NO ME TIRA.mp3",
         "artista": "Ronpe 99",
         "genero": "Trap",
-        "duracion": 1,
-        "id": 11,
+        "duracion": 0,
+        "id": 1,
         "fechaPublicacion": "2024-09-11",
         "nombre": "NO ME TIRA",
         "cantidadReproducciones": 362719
@@ -37,10 +48,32 @@
         "artista": "Ronpe 99",
         "genero": "Rap",
         "duracion": 0,
-        "id": 1,
+        "id": 2,
         "fechaPublicacion": "2024-09-24",
         "nombre": "Sacrificio",
         "cantidadReproducciones": 300
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Preacher.mp3",
+        "artista": "Years & Years",
+        "genero": "Pop",
+        "duracion": 0,
+        "id": 3,
+        "fechaPublicacion": "2019-02-14",
+        "nombre": "Preacher",
+        "cantidadReproducciones": 8421232
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Sanctify.mp3",
+        "artista": "Years & Years",
+        "genero": "Pop",
+        "duracion": 0,
+        "id": 4,
+        "fechaPublicacion": "2019-02-14",
+        "nombre": "Sanctify",
+        "cantidadReproducciones": 8421402
     },
     {
         "colaboradores": [{
@@ -53,7 +86,7 @@
         "artista": "Ronpe 99",
         "genero": "Trap",
         "duracion": 0,
-        "id": 2,
+        "id": 5,
         "fechaPublicacion": "2024-09-24",
         "nombre": "ME VAN A ENFERMAR",
         "cantidadReproducciones": 681810
@@ -69,9 +102,36 @@
         "artista": "Ronpe 99",
         "genero": "Trap",
         "duracion": 0,
-        "id": 3,
+        "id": 6,
         "fechaPublicacion": "2024-09-24",
         "nombre": "TESTIGOS",
         "cantidadReproducciones": 257976
+    },
+    {
+        "colaboradores": [{
+            "albums": ["Valentino"],
+            "generos": ["Pop"],
+            "id": 20,
+            "nombre": "Mnek"
+        }],
+        "rutaArchivo": "Valentino.mp3",
+        "artista": "Years & Years",
+        "genero": "Pop",
+        "duracion": 0,
+        "id": 7,
+        "fechaPublicacion": "2019-02-14",
+        "nombre": "Valentino",
+        "cantidadReproducciones": 48234185
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "All for you.mp3",
+        "artista": "Years & Years",
+        "genero": "Pop",
+        "duracion": 0,
+        "id": 8,
+        "fechaPublicacion": "2019-02-14",
+        "nombre": "All for you",
+        "cantidadReproducciones": 9873372
     }
 ]

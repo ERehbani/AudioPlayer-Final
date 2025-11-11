@@ -6,6 +6,18 @@
         "nombre": "Oney1"
     },
     {
+        "albums": ["Valentino"],
+        "generos": ["Pop"],
+        "id": 20,
+        "nombre": "Mnek"
+    },
+    {
+        "albums": ["Palo Santo"],
+        "generos": [],
+        "id": 19,
+        "nombre": "Years & Years"
+    },
+    {
         "albums": ["NO ME TIRA"],
         "generos": ["Trap"],
         "id": 15,
@@ -16,6 +28,12 @@
         "generos": ["Trap"],
         "id": 5,
         "nombre": "Carajita"
+    },
+    {
+        "albums": ["Freak"],
+        "generos": ["Pop"],
+        "id": 34,
+        "nombre": "Yuqi"
     },
     {
         "albums": ["Escupo veneno"],
