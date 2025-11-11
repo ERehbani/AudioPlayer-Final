@@ -32,7 +32,7 @@ public class UI {
             System.out.println("1. 🎵 Canciones");
             System.out.println("2. 🎤 Artistas y Álbumes");
             System.out.println("3. 🎶 Playlists");
-            System.out.println("4. ▶ Reproducción / Controles");
+            System.out.println("4. ▶️ Reproducción / Controles");
             System.out.println("0. 🚪 Salir");
             System.out.print("Seleccione una opción: ");
 
@@ -62,11 +62,11 @@ public class UI {
         int opcion;
         do {
             System.out.println("\n=== 🎵 MENÚ CANCIONES ===");
-            System.out.println("1. Buscar canción");
-            System.out.println("2. Crear nueva canción");
-            System.out.println("3. Listar todas las canciones");
-            System.out.println("4. Eliminar canción");
-            System.out.println("0. Volver");
+            System.out.println("1. 🔍 Buscar canción");
+            System.out.println("2. ➕ Crear nueva canción");
+            System.out.println("3. 🗒️ Listar todas las canciones");
+            System.out.println("4. 🚫 Eliminar canción");
+            System.out.println("0. ⬅️ Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
 
@@ -123,14 +123,14 @@ public class UI {
         int opcion;
         do {
             System.out.println("\n=== 🎤 MENÚ ARTISTAS / ÁLBUMES ===");
-            System.out.println("1. Buscar artista");
-            System.out.println("2. Buscar álbum");
-            System.out.println("3. Crear nuevo artista");
-            System.out.println("4. Crear nuevo álbum");
-            System.out.println("5. Eliminar artista");
-            System.out.println("6. Eliminar álbum");
-            System.out.println("7. ▶ Reproducir álbum");
-            System.out.println("0. Volver");
+            System.out.println("1. 🔍🎤 Buscar artista");
+            System.out.println("2. 🔎📒 Buscar álbum");
+            System.out.println("3. ➕🎤 Crear nuevo artista");
+            System.out.println("4. ➕📒 Crear nuevo álbum");
+            System.out.println("5. 🚫🎤 Eliminar artista");
+            System.out.println("6. 🚫📒 Eliminar álbum");
+            System.out.println("7. ▶️ Reproducir álbum");
+            System.out.println("0. ⬅️ Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
 
@@ -155,12 +155,12 @@ public class UI {
         int opcion;
         do {
             System.out.println("\n=== 🎶 MENÚ PLAYLISTS ===");
-            System.out.println("1. Crear nueva playlist");
-            System.out.println("2. Ver playlists");
-            System.out.println("3. Agregar canción a playlist");
-            System.out.println("4. Reproducir playlist");
-            System.out.println("5. Eliminar playlist");
-            System.out.println("0. Volver");
+            System.out.println("1. ➕🎵 Crear nueva playlist");
+            System.out.println("2. 🗒️🎵 Ver playlists");
+            System.out.println("3. ➕🎶 Agregar canción a playlist");
+            System.out.println("4. ▶️🎵 Reproducir playlist");
+            System.out.println("5. 🚫🎵 Eliminar playlist");
+            System.out.println("0. ⬅️ Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
 
@@ -221,13 +221,13 @@ public class UI {
         int opcion;
         do {
             System.out.println("\n=== ▶ CONTROLES DE REPRODUCCIÓN ===");
-            System.out.println("1. Reproducir todas las canciones");
-            System.out.println("2. Siguiente");
-            System.out.println("3. Anterior");
-            System.out.println("4. Pausar");
-            System.out.println("5. Continuar");
-            System.out.println("6. Detener");
-            System.out.println("0. Volver");
+            System.out.println("1. ▶️🗒️ Reproducir todas las canciones");
+            System.out.println("2. ⏭️ Siguiente");
+            System.out.println("3. ⏮️ Anterior");
+            System.out.println("4. ⏸️ Pausar");
+            System.out.println("5. ➡️ Continuar");
+            System.out.println("6. ⏹️ Detener");
+            System.out.println("0. ⬅️ Volver");
             System.out.print("Opción: ");
             opcion = Integer.parseInt(sc.nextLine());
 

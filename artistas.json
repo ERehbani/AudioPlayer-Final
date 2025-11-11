@@ -1,0 +1,32 @@
+[
+    {
+        "albums": ["TENGO TO"],
+        "generos": ["Rap"],
+        "id": 4,
+        "nombre": "Oney1"
+    },
+    {
+        "albums": ["NO ME TIRA"],
+        "generos": ["Trap"],
+        "id": 15,
+        "nombre": "Zeballos"
+    },
+    {
+        "albums": ["TESTIGOS"],
+        "generos": ["Trap"],
+        "id": 5,
+        "nombre": "Carajita"
+    },
+    {
+        "albums": ["Escupo veneno"],
+        "generos": [],
+        "id": 0,
+        "nombre": "Ronpe 99"
+    },
+    {
+        "albums": ["ME VAN A ENFERMAR"],
+        "generos": ["Trap"],
+        "id": 3,
+        "nombre": "Dillom"
+    }
+]

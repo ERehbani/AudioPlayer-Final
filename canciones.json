@@ -1,0 +1,77 @@
+[
+    {
+        "colaboradores": [{
+            "albums": ["TENGO TO"],
+            "generos": ["Rap"],
+            "id": 4,
+            "nombre": "Oney1"
+        }],
+        "rutaArchivo": "TENGO TO.mp3",
+        "artista": "Ronpe 99",
+        "genero": "Rap",
+        "duracion": 0,
+        "id": 0,
+        "fechaPublicacion": "2024-09-24",
+        "nombre": "TENGO TO",
+        "cantidadReproducciones": 649153
+    },
+    {
+        "colaboradores": [{
+            "albums": ["NO ME TIRA"],
+            "generos": ["Trap"],
+            "id": 15,
+            "nombre": "Zeballos"
+        }],
+        "rutaArchivo": "NO ME TIRA.mp3",
+        "artista": "Ronpe 99",
+        "genero": "Trap",
+        "duracion": 1,
+        "id": 11,
+        "fechaPublicacion": "2024-09-11",
+        "nombre": "NO ME TIRA",
+        "cantidadReproducciones": 362719
+    },
+    {
+        "colaboradores": [],
+        "rutaArchivo": "Sacrificio.mp3",
+        "artista": "Ronpe 99",
+        "genero": "Rap",
+        "duracion": 0,
+        "id": 1,
+        "fechaPublicacion": "2024-09-24",
+        "nombre": "Sacrificio",
+        "cantidadReproducciones": 300
+    },
+    {
+        "colaboradores": [{
+            "albums": ["ME VAN A ENFERMAR"],
+            "generos": ["Trap"],
+            "id": 3,
+            "nombre": "Dillom"
+        }],
+        "rutaArchivo": "ME VAN A ENFERMAR.mp3",
+        "artista": "Ronpe 99",
+        "genero": "Trap",
+        "duracion": 0,
+        "id": 2,
+        "fechaPublicacion": "2024-09-24",
+        "nombre": "ME VAN A ENFERMAR",
+        "cantidadReproducciones": 681810
+    },
+    {
+        "colaboradores": [{
+            "albums": ["TESTIGOS"],
+            "generos": ["Trap"],
+            "id": 5,
+            "nombre": "Carajita"
+        }],
+        "rutaArchivo": "TESTIGOS.mp3",
+        "artista": "Ronpe 99",
+        "genero": "Trap",
+        "duracion": 0,
+        "id": 3,
+        "fechaPublicacion": "2024-09-24",
+        "nombre": "TESTIGOS",
+        "cantidadReproducciones": 257976
+    }
+]
