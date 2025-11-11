@@ -184,7 +184,6 @@ public class UI {
             listaPlayer.setLista(canciones);
             listaPlayer.reproducirActual();
 
-            // Submenu de control mientras se reproduce
             int opcion;
             do {
                 System.out.println("\n🎶 Reproduciendo playlist: " + p.getNombre());
@@ -431,7 +430,6 @@ public class UI {
                 artista = servicio.crearArtista(nombreArtista);
             }
 
-            // Crear el mapa con el artista principal
             Map<String, Artista> map = new HashMap<>();
             map.put(artista.getNombre(), artista);
 
@@ -444,7 +442,6 @@ public class UI {
             Album a = servicio.crearAlbum(nombre, fecha, discografica);
             a.setArtistas(map);
 
-            // Mantener relación bidireccional
             artista.agregarAlbum(a);
 
             System.out.println("✅ Álbum creado: " + a.getNombre());

@@ -37,8 +37,8 @@
         "rutaArchivo": "R U mine?.mp3",
         "artista": "Arctic monkeys",
         "genero": "Indie",
-        "duracion": 4,
-        "id": 12,
+        "duracion": 0,
+        "id": 3,
         "fechaPublicacion": "2006-11-29",
         "nombre": "R U mine?",
         "cantidadReproducciones": 23435
@@ -62,7 +62,7 @@
         "artista": "bad bunny",
         "genero": "Trap",
         "duracion": 0,
-        "id": 3,
+        "id": 4,
         "fechaPublicacion": "2020-02-20",
         "nombre": "yhlqmdlg",
         "cantidadReproducciones": 34253
@@ -73,7 +73,7 @@
         "artista": "Poppy",
         "genero": "Pop",
         "duracion": 0,
-        "id": 4,
+        "id": 5,
         "fechaPublicacion": "2024-11-15",
         "nombre": "the cost of giving up",
         "cantidadReproducciones": 13018438
